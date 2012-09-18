@@ -1,5 +1,6 @@
 package no.uib.info331.geomusic.utils;
 
+import android.app.Activity;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -10,8 +11,9 @@ import android.util.Log;
 public class GeoLocationListener implements LocationListener {
 	
 	private LocationManager locManager;
+	private Activity activity;
 	
-	public GeoLocationListener(LocationManager locManager) {
+	public GeoLocationListener(LocationManager locManager, Activity activity) {
 		super();
 		this.locManager = locManager;
 	}
