@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.umass.lastfm.Event;
+import de.umass.lastfm.Geo;
+import de.umass.lastfm.PaginatedResult;
 
 import android.app.Activity;
 import android.location.Location;
@@ -14,7 +16,7 @@ public class FetchEventListAsyncTask extends
 		AsyncTask<Location, Integer, List<Event>> {
 	
 	
-	LocationManager locManager;
+	//LocationManager locManager;
 	Activity activity;
 	
 	public FetchEventListAsyncTask(Activity activity) {
@@ -31,6 +33,14 @@ public class FetchEventListAsyncTask extends
 	@Override
 	protected List<Event> doInBackground(Location... locations) {
 		// TODO Auto-generated method stub
+		Location loc=locations[0];
+		double latitude=loc.getLatitude();
+		double longitude=loc.getLongitude();
+	
+		PaginatedResult<Event> event=Geo.getEvents(latitude,longitude,1,"5456gfgh");
+		
+		
+		
 		return new ArrayList<Event>();
 	}
 	
