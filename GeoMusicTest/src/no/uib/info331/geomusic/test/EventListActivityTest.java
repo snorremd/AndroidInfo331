@@ -10,6 +10,10 @@ public class EventListActivityTest extends
 		super(EventListActivity.class);
 	}
 	
-	
+	protected void setUp() {
+		
+		
+		
+	}
 
 }
