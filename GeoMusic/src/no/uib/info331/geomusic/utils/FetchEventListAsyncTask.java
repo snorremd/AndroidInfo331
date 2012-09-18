@@ -1,5 +1,6 @@
 package no.uib.info331.geomusic.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.umass.lastfm.Event;
@@ -11,10 +12,16 @@ import android.os.AsyncTask;
 
 public class FetchEventListAsyncTask extends
 		AsyncTask<Location, Integer, List<Event>> {
-
+	
+	
 	LocationManager locManager;
 	Activity activity;
 	
+	public FetchEventListAsyncTask(Activity activity) {
+		super();
+		this.activity = activity;
+	}
+
 	@Override
 	protected void onPreExecute() {
 		// TODO Auto-generated method stub
@@ -24,7 +31,7 @@ public class FetchEventListAsyncTask extends
 	@Override
 	protected List<Event> doInBackground(Location... locations) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Event>();
 	}
 	
 	@Override

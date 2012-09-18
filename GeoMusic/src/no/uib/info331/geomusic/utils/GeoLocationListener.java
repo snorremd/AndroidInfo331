@@ -1,5 +1,6 @@
 package no.uib.info331.geomusic.utils;
 
+import no.uib.info331.geomusic.WelcomeActivity;
 import android.app.Activity;
 import android.location.Location;
 import android.location.LocationListener;
@@ -9,13 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class GeoLocationListener implements LocationListener {
-	
+
 	private LocationManager locManager;
 	private Activity activity;
-	
+
 	public GeoLocationListener(LocationManager locManager, Activity activity) {
 		super();
 		this.locManager = locManager;
+		this.activity = activity;
 	}
 
 	@Override
@@ -24,6 +26,16 @@ public class GeoLocationListener implements LocationListener {
 		if(location != null) {
 			// Stop listening for gps location to save battery
 			locManager.removeUpdates(this);
+			
+			/*
+			 * Check which type of activity is requesting a gps location and
+			 * send a callback to one of that activity functions with a gps
+			 * 
+			 */
+			if(activity instanceof WelcomeActivity) {
+				((WelcomeActivity) activity).fetchEventList(location);
+			}
+				
 		}
 	}
 
@@ -45,7 +57,7 @@ public class GeoLocationListener implements LocationListener {
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		// TODO Auto-generated method stub
 		Log.d("GeoLocationListener", "GPS status changed.");
-		
+
 		// Do a switch case and debug the new state of the GPS
 		switch (status) {
 		case LocationProvider.AVAILABLE:
