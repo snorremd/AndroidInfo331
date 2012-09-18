@@ -24,11 +24,7 @@ public class GeoLocationListener implements LocationListener {
 		if(location != null) {
 			// Stop listening for gps location to save battery
 			locManager.removeUpdates(this);
-			
-			double latitude = location.getLatitude();
-			double longtitude = location.getLongitude();
 		}
-
 	}
 
 	@Override
