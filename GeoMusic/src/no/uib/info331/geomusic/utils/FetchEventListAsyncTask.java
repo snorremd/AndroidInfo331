@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.umass.lastfm.Event;
+import de.umass.lastfm.Geo;
 
 import android.app.Activity;
 import android.location.Location;
@@ -13,8 +14,6 @@ import android.os.AsyncTask;
 public class FetchEventListAsyncTask extends
 		AsyncTask<Location, Integer, List<Event>> {
 	
-	
-	LocationManager locManager;
 	Activity activity;
 	
 	public FetchEventListAsyncTask(Activity activity) {
