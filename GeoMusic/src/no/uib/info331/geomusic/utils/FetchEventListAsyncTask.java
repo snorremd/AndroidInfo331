@@ -3,6 +3,9 @@ package no.uib.info331.geomusic.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.uib.info331.geomusic.GeoConcertApplication;
+import no.uib.info331.geomusic.WelcomeActivity;
+
 import de.umass.lastfm.Event;
 import de.umass.lastfm.Geo;
 import de.umass.lastfm.PaginatedResult;
@@ -51,6 +54,13 @@ public class FetchEventListAsyncTask extends
 	protected void onPostExecute(List<Event> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
+		GeoConcertApplication app = (GeoConcertApplication) activity.getApplication();
+		app.setEvents(result);
+		if(activity instanceof WelcomeActivity) {
+			
+			((WelcomeActivity) activity).showEventListActivity();
+		}
+		
 	}
 	
 	@Override

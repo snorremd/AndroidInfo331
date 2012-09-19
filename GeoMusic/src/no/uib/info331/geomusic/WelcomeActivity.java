@@ -6,10 +6,12 @@ import de.umass.lastfm.Event;
 
 import no.uib.info331.geomusic.utils.FetchEventListAsyncTask;
 import no.uib.info331.geomusic.utils.GeoLocationListener;
+import android.hardware.GeomagneticField;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 
 public class WelcomeActivity extends Activity {
@@ -47,10 +49,12 @@ public class WelcomeActivity extends Activity {
      * this method and pass a list of events to show the
      * event list activity and pass it's events to the next
      * activity.
-     * @param events
      */
-    public void showEventListActivity(List<Event> events) {
-    	
+    public void showEventListActivity() {
+    	// Make intent to change to event list activity
+        Intent intent = new Intent(this, EventInfoActivity.class);
+        startActivity(intent);
+
     }
     
 }
