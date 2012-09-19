@@ -6,5 +6,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_event_list">EventList</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_event_info">EventInfoActivity</string>
+    <string name="artists">Artists</string>
 
 </resources>
