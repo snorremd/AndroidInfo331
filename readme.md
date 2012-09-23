@@ -30,7 +30,7 @@ public void methodName(
 	}
 ```
 
-#### Javadoc &amp method comments
+#### Javadoc & method comments
 
 All public methods should have a Javadoc. The return value and parameter values can have descriptions if necessary.
 
@@ -38,7 +38,7 @@ All public methods should have a Javadoc. The return value and parameter values 
 /**
   * A description of the method and it's
   * use area should be first.
-
+  *
   * @param user
   * @return name - the full name of the user
   */
@@ -64,9 +64,9 @@ public String toLowerCase(String title) {
 
 ### Commits and commit messages
 
-Only commit working code. Your commit does not have to complete new functionality, but the code should compile, run and not affect other parts of the codebase.
+Only commit working code. Your commit does not have to complete new functionality, but the code should compile, run and not affect other parts of the codebase. All commited code should have working tests associated with them! Please make regression tests, unit tests and integration tests where applicable before committing.
 
-Commit messages should have the following format:
+Commit messages pertaining to the app should have the following format:
 
 ```
 Use case: As a user I want to......
