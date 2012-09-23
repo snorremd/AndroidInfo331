@@ -68,7 +68,9 @@ Only commit working code. Your commit does not have to complete new functionalit
 
 Commit messages should have the following format:
 
+```
 Use case: As a user I want to......
+
 Status: Finished/In Progress/Updated
 
 Filename: FetchEventsAsyncTask.java
@@ -76,3 +78,4 @@ Changes: I changed this and that. I fixed this and that method and functionality
 
 Filename: GeoApplication
 Changes: I did this and that and this and that. Please explain nicely here.
+```
