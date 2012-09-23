@@ -16,7 +16,7 @@ Methods with <= 2 parameters
 public void methodName(Class param1, Class param2) {
 	// Contents
 }
-``
+```
 
 Methods with >= 3 parameters
 
