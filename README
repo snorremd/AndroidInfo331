@@ -12,48 +12,55 @@ To make the code as tidy and readable as possible all developers should use the 
 
 Methods with <= 2 parameters
 
-	public void methodName(Class param1, Class param2) {
-		// Contents
-	}
+```java
+public void methodName(Class param1, Class param2) {
+	// Contents
+}
+``
 
 Methods with >= 3 parameters
 
-	public void methodName(
-			Class param1,
-			Class param2,
-			Class param3,
-			Class param4) {
-		// Contents
-		}
+```java
+public void methodName(
+		Class param1,
+		Class param2,
+		Class param3,
+		Class param4) {
+	// Contents
+	}
+```
 
 #### Javadoc &amp method comments
 
 All public methods should have a Javadoc. The return value and parameter values can have descriptions if necessary.
 
-	/**
-	  * A description of the method and it's
-	  * use area should be first.
+```java
+/**
+  * A description of the method and it's
+  * use area should be first.
 
-	  * @param user
-	  * @return name - the full name of the user
-	  */
-	public String getName(User user) {
-		// Contents
-	}
+  * @param user
+  * @return name - the full name of the user
+  */
+public String getName(User user) {
+	// Contents
+}
+```
 
 All private methods should have a multiline comment in the same style as a javadoc.
 
-	/*
-	 * A brief description of the method and what
-	 * it does should come first.
-	 *
-	 * @param title
-	 * @return title in lowercase
-	 */
-	public String toLowerCase(String title) {
-		// Contents
-	}
-
+```java
+/*
+ * A brief description of the method and what
+ * it does should come first.
+ *
+ * @param title
+ * @return title in lowercase
+ */
+public String toLowerCase(String title) {
+	// Contents
+}
+```
 
 ### Commits and commit messages
 
@@ -61,11 +68,11 @@ Only commit working code. Your commit does not have to complete new functionalit
 
 Commit messages should have the following format:
 
-	Use case: As a user I want to......
-	Status: Finished/In Progress/Updated
+Use case: As a user I want to......
+Status: Finished/In Progress/Updated
 
-	Filename: FetchEventsAsyncTask.java
-	Changes: I changed this and that. I fixed this and that method and functionality. Dup di du and more stuff here.
+Filename: FetchEventsAsyncTask.java
+Changes: I changed this and that. I fixed this and that method and functionality. Dup di du and more stuff here.
 
-	Filename: GeoApplication
-	Changes: I did this and that and this and that. Please explain nicely here.
+Filename: GeoApplication
+Changes: I did this and that and this and that. Please explain nicely here.
