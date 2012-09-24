@@ -28,7 +28,7 @@ public class GeoLocationListener implements LocationListener {
 	public void onLocationChanged(Location location) {
 		// Make sure we have a connection
 		if(location != null) {
-			
+
 			// Setting location
 			application.setLocation(location);
 			
@@ -36,8 +36,10 @@ public class GeoLocationListener implements LocationListener {
 			locManager.removeUpdates(this);
 			if(this.activity != null)
 			{
-				if(this.activity.getClass().equals("WelcomeActivity"))
+				if(this.activity.getClass().equals(WelcomeActivity.class))
+				{
 					((WelcomeActivity) this.activity).fetchEventList(location);
+				}
 			}
 		}
 	}

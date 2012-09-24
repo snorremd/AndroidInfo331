@@ -9,6 +9,7 @@ import android.app.Application;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
 import de.umass.lastfm.Event;
 
 public class GeoConcertApplication extends Application {
