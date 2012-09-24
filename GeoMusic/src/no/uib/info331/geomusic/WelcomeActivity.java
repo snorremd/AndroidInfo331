@@ -1,30 +1,24 @@
 package no.uib.info331.geomusic;
 
-import java.util.List;
-
-import de.umass.lastfm.Event;
-
-import no.uib.info331.geomusic.utils.FetchEventListAsyncTask;
-import no.uib.info331.geomusic.utils.GeoLocationListener;
-import android.hardware.GeomagneticField;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
 public class WelcomeActivity extends Activity {
 	
-	LocationManager locManager;
-
+	
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        locManager = (LocationManager) getSystemService(Activity.LOCATION_SERVICE);
-        //GeoLocationListener geoLocListener = 
-        	new GeoLocationListener(locManager, this);
+        
+    	Log.d("Info", "on create welcome activity");
+
+        ((GeoConcertApplication)this.getApplication()).updateLocation(this); 
     }
 
     @Override
@@ -40,8 +34,9 @@ public class WelcomeActivity extends Activity {
      * @param location The current location of the phone
      */
     public void fetchEventList(Location location) {
-    	FetchEventListAsyncTask fetchEventListAT = new FetchEventListAsyncTask(this);
-        fetchEventListAT.execute(location);
+    	//FetchEventListAsyncTask fetchEventListAT = new FetchEventListAsyncTask(this);
+        //fetchEventListAT.execute(location);
+    	Log.d("GPS", "location = " + location.getLatitude() + "-" + location.getLongitude());
     }
     
     /**
