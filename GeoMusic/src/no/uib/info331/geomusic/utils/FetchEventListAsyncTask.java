@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import no.uib.info331.geomusic.GeoConcertApplication;
+import no.uib.info331.geomusic.R;
 import no.uib.info331.geomusic.WelcomeActivity;
 import android.app.Activity;
 import android.location.Location;
@@ -13,7 +14,7 @@ import de.umass.lastfm.Geo;
 import de.umass.lastfm.PaginatedResult;
 
 public class FetchEventListAsyncTask extends
-		AsyncTask<Location, Integer, List<Event>> {
+		AsyncTask<Location, Integer, PaginatedResult<Event>> {
 	
 
 	
@@ -33,21 +34,19 @@ public class FetchEventListAsyncTask extends
 	}
 	
 	@Override
-	protected List<Event> doInBackground(Location... locations) {
+	protected PaginatedResult<Event> doInBackground(Location... locations) {
 		// TODO Auto-generated method stub
 		Location loc=locations[0];
 		double latitude=loc.getLatitude();
 		double longitude=loc.getLongitude();
 	
-		PaginatedResult<Event> event=Geo.getEvents(latitude,longitude,1,"5456gfgh");
+		PaginatedResult<Event> events = Geo.getEvents(latitude,longitude,1, activity.getString(R.string.lastfm_api_key));
 		
-		
-		
-		return new ArrayList<Event>();
+		return events;
 	}
 	
 	@Override
-	protected void onPostExecute(List<Event> result) {
+	protected void onPostExecute(PaginatedResult<Event> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 		GeoConcertApplication app = (GeoConcertApplication) activity.getApplication();

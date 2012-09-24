@@ -11,37 +11,24 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
 import de.umass.lastfm.Event;
+import de.umass.lastfm.PaginatedResult;
 
 public class GeoConcertApplication extends Application {
 //	private static GeoConcertApplication singleton;
 
 	/* list of the events */
-	private List<Event> events;
+	private PaginatedResult<Event> events;
 	/* last saved location */
 	private Location location;
-	
 	
 	LocationManager locationManager;
 	GeoLocationListener locListener;
 	
-	/* code for implement singleton 
-	 * but i don't know if it's useful
-	 * */
-	
-//	public GeoConcertApplication getInstance(){
-//		return singleton;
-//	}
-//	
-//	@Override
-//	public void onCreate() {
-//		super.onCreate();
-//		singleton = this;
-//	}
-	
-	
-	public GeoConcertApplication() {
-		super();
-		setEvents(new ArrayList<Event>()); 
+	/**
+	 * Private constructor. Is not to be called.
+	 */
+	private GeoConcertApplication() {
+		super(); 
 	}
 
 	@Override
@@ -49,8 +36,15 @@ public class GeoConcertApplication extends Application {
 		super.onCreate();  
 	}
 	
-	public void updateLocation(Activity activity)
-	{
+	/**
+	 * Fetches the current location of the user. The location is sent
+	 * to an activity through a call back method on location update from
+	 * the GeoLocationListener.
+	 * 
+	 * @param activity to make the callback to
+	 */
+	public void updateLocation(Activity activity) {
+		
 		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		locListener = new GeoLocationListener(locationManager, this, activity);
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
@@ -60,18 +54,36 @@ public class GeoConcertApplication extends Application {
 			this.setLocation(lastKnownLocation);
 		} 
 	}
-	public List<Event> getEvents() {
+	
+
+	/**
+	 * 
+	 * @return
+	 */
+	public PaginatedResult<Event> getEvents() {
 		return events;
 	}
 
-	public void setEvents(List<Event> events) {
-		this.events = events;
+	/**
+	 * 
+	 * @param result
+	 */
+	public void setEvents(PaginatedResult<Event> result) {
+		this.events = result;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Location getLocation() {
 		return location;
 	}
 
+	/**
+	 * 
+	 * @param location
+	 */
 	public void setLocation(Location location) {
 		this.location = location;
 	}

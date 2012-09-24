@@ -10,12 +10,27 @@ import android.os.Bundle;
 import android.util.Log;
 import no.uib.info331.geomusic.WelcomeActivity;
 
+/**
+ * 
+ * @author Snorre Magnus Dav¿en
+ * @author Per-¯ivin Andersen
+ * @author Uma Behera
+ * @author Andrea Cresta
+ * @author Armindokht
+ *
+ */
 public class GeoLocationListener implements LocationListener {
 
 	private LocationManager locManager;
 	private GeoConcertApplication application;
 	private Activity activity;
 	
+	/**
+	 * 
+	 * @param locManager object to get current location
+	 * @param application GeoConcertApplication object to store location info
+	 * @param activity to make a callback to
+	 */
 	public GeoLocationListener(LocationManager locManager, GeoConcertApplication application, Activity activity) {
 		super();
 		
@@ -36,6 +51,7 @@ public class GeoLocationListener implements LocationListener {
 			locManager.removeUpdates(this);
 			if(this.activity != null)
 			{
+				// Make a callback according to Activity class
 				if(this.activity.getClass().equals(WelcomeActivity.class))
 				{
 					((WelcomeActivity) this.activity).fetchEventList(location);

@@ -1,5 +1,6 @@
 package no.uib.info331.geomusic;
 
+import no.uib.info331.geomusic.utils.FetchEventListAsyncTask;
 import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
@@ -34,8 +35,8 @@ public class WelcomeActivity extends Activity {
      * @param location The current location of the phone
      */
     public void fetchEventList(Location location) {
-    	//FetchEventListAsyncTask fetchEventListAT = new FetchEventListAsyncTask(this);
-        //fetchEventListAT.execute(location);
+    	FetchEventListAsyncTask fetchEventListAT = new FetchEventListAsyncTask(this);
+        fetchEventListAT.execute(location);
     	Log.d("GPS", "location = " + location.getLatitude() + "-" + location.getLongitude());
     }
     
@@ -47,7 +48,7 @@ public class WelcomeActivity extends Activity {
      */
     public void showEventListActivity() {
     	// Make intent to change to event list activity
-        Intent intent = new Intent(this, EventInfoActivity.class);
+        Intent intent = new Intent(this, EventListActivity.class);
         startActivity(intent);
 
     }

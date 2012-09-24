@@ -1,7 +1,6 @@
 <resources>
 
     <string name="app_name">GeoConcert</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_event_list">EventList</string>
@@ -10,5 +9,6 @@
     <string name="artists">Artists</string>
     <string name="lastfm_api_key">07230bd610a9af18c7e1f19d2da654f1</string>
     <string name="lastfm_secret">aee7a363ef03d2d0d6513e0eefaf903b</string>
+    <string name="placeholder">Placeholder Text</string>
 
 </resources>
