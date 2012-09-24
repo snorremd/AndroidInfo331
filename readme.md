@@ -32,6 +32,22 @@ public void methodName(
 
 #### Javadoc & method comments
 
+All classes should have a Javadoc descriptor. It should contain author and version tags.
+
+```java
+/**
+  * EventAdapter extends the ArrayAdapter class used to translate data from arrays
+  * to a custom layout object. It is used so and so and works like this and this.
+  *
+  * @version 2012.09.24
+  * @author Firstname Surname
+  * @author Firstname2 Surname2
+  */
+public class EventAdapter extends ArrayAdapter<Event> {
+	// Contents
+}
+```
+
 All public methods should have a Javadoc. The return value and parameter values can have descriptions if necessary.
 
 ```java
