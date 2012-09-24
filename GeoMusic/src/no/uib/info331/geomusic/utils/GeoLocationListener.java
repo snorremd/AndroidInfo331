@@ -1,7 +1,6 @@
 package no.uib.info331.geomusic.utils;
 
-import no.uib.info331.geomusic.WelcomeActivity;
-import android.app.Activity;
+import no.uib.info331.geomusic.GeoConcertApplication;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,30 +11,24 @@ import android.util.Log;
 public class GeoLocationListener implements LocationListener {
 
 	private LocationManager locManager;
-	private Activity activity;
-
-	public GeoLocationListener(LocationManager locManager, Activity activity) {
+	private GeoConcertApplication application;
+	
+	public GeoLocationListener(LocationManager locManager, GeoConcertApplication application) {
 		super();
 		this.locManager = locManager;
-		this.activity = activity;
+		this.application = application;
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
 		// Make sure we have a connection
 		if(location != null) {
-			// Stop listening for gps location to save battery
-			locManager.removeUpdates(this);
 			
-			/*
-			 * Check which type of activity is requesting a gps location and
-			 * send a callback to one of that activity functions with a gps
-			 * 
-			 */
-			if(activity instanceof WelcomeActivity) {
-				((WelcomeActivity) activity).fetchEventList(location);
-			}
-				
+			// Setting location
+			application.setLocation(location);
+			
+			// Stop listening for gps location to save battery
+			locManager.removeUpdates(this);		
 		}
 	}
 

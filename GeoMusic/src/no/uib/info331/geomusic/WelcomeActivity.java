@@ -22,9 +22,6 @@ public class WelcomeActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        locManager = (LocationManager) getSystemService(Activity.LOCATION_SERVICE);
-        //GeoLocationListener geoLocListener = 
-        	new GeoLocationListener(locManager, this);
     }
 
     @Override
