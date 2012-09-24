@@ -11,17 +11,21 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 
 public class WelcomeActivity extends Activity {
 	
-	LocationManager locManager;
-
+	
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        
+        ((GeoConcertApplication)this.getApplication()).updateLocation(this); 
     }
 
     @Override
@@ -37,8 +41,10 @@ public class WelcomeActivity extends Activity {
      * @param location The current location of the phone
      */
     public void fetchEventList(Location location) {
-    	FetchEventListAsyncTask fetchEventListAT = new FetchEventListAsyncTask(this);
-        fetchEventListAT.execute(location);
+    	//FetchEventListAsyncTask fetchEventListAT = new FetchEventListAsyncTask(this);
+        //fetchEventListAT.execute(location);
+    	Log.d("Info", "inside fetcheventlist");
+    	
     }
     
     /**

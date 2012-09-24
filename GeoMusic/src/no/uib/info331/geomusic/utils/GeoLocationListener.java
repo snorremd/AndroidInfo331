@@ -1,22 +1,27 @@
 package no.uib.info331.geomusic.utils;
 
 import no.uib.info331.geomusic.GeoConcertApplication;
+import android.app.Activity;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
+import no.uib.info331.geomusic.WelcomeActivity;
 
 public class GeoLocationListener implements LocationListener {
 
 	private LocationManager locManager;
 	private GeoConcertApplication application;
+	private Activity activity;
 	
-	public GeoLocationListener(LocationManager locManager, GeoConcertApplication application) {
+	public GeoLocationListener(LocationManager locManager, GeoConcertApplication application, Activity activity) {
 		super();
+		
 		this.locManager = locManager;
 		this.application = application;
+		this.activity=activity;
 	}
 
 	@Override
@@ -28,7 +33,12 @@ public class GeoLocationListener implements LocationListener {
 			application.setLocation(location);
 			
 			// Stop listening for gps location to save battery
-			locManager.removeUpdates(this);		
+			locManager.removeUpdates(this);
+			if(this.activity != null)
+			{
+				if(this.activity.getClass().equals("WelcomeActivity"))
+					((WelcomeActivity) this.activity).fetchEventList(location);
+			}
 		}
 	}
 

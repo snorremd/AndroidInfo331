@@ -5,16 +5,12 @@ import java.util.List;
 
 import no.uib.info331.geomusic.GeoConcertApplication;
 import no.uib.info331.geomusic.WelcomeActivity;
-
+import android.app.Activity;
+import android.location.Location;
+import android.os.AsyncTask;
 import de.umass.lastfm.Event;
 import de.umass.lastfm.Geo;
 import de.umass.lastfm.PaginatedResult;
-
-
-import android.app.Activity;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.AsyncTask;
 
 public class FetchEventListAsyncTask extends
 		AsyncTask<Location, Integer, List<Event>> {
