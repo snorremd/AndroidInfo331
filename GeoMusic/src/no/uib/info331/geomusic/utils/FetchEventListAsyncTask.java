@@ -9,6 +9,7 @@ import no.uib.info331.geomusic.WelcomeActivity;
 import android.app.Activity;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.util.Log;
 import de.umass.lastfm.Event;
 import de.umass.lastfm.Geo;
 import de.umass.lastfm.PaginatedResult;
@@ -41,7 +42,7 @@ public class FetchEventListAsyncTask extends
 		double longitude=loc.getLongitude();
 	
 		PaginatedResult<Event> events = Geo.getEvents(latitude,longitude,1, activity.getString(R.string.lastfm_api_key));
-		
+		Log.d("DEBUG", "" + events.isEmpty());
 		return events;
 	}
 	

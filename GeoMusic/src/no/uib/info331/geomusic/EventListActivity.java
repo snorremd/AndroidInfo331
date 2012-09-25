@@ -24,7 +24,7 @@ import android.widget.Toast;
 public class EventListActivity extends ListActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         Log.d("EventListActivity", "Creating the activity");
@@ -33,7 +33,9 @@ public class EventListActivity extends ListActivity {
         PaginatedResult<Event> events = application.getEvents();
         Event[] eventArray = new Event[0];
         if(events != null) {
-        	eventArray = (Event[]) events.getPageResults().toArray();
+        	ArrayList <Event> a = new ArrayList<Event>(events.getPageResults());
+        	eventArray = (Event[]) a.toArray(new Event[a.size()]);
+        	Log.d("EventListActivity", "" + a.size());
         }
         
         //ListView eventListView = (ListView) findViewById(R.id.eventListView);
