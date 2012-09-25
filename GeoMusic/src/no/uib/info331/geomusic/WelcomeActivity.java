@@ -4,22 +4,30 @@ import no.uib.info331.geomusic.utils.FetchEventListAsyncTask;
 import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends Activity implements LocationListener {
 	
-	
+	private LocationManager locManager;
+	private GeoConcertApplication application;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("WelcomeActivity", "In on create welcome activity");
+        
+        Log.d("WelcomeActivity", "Sat content view");
         setContentView(R.layout.activity_welcome);
         
-    	Log.d("Info", "on create welcome activity");
-
-        ((GeoConcertApplication)this.getApplication()).updateLocation(this); 
+        Log.d("WelcomeActivity", "Get application instance");
+        application = ((GeoConcertApplication) getApplication());
+        locManager = application.getLocationManager();
+        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     }
 
     @Override
@@ -35,9 +43,10 @@ public class WelcomeActivity extends Activity {
      * @param location The current location of the phone
      */
     public void fetchEventList(Location location) {
+    	Log.d("WelcomeActivity", "Fetch events based on location: " + location);
     	FetchEventListAsyncTask fetchEventListAT = new FetchEventListAsyncTask(this);
         fetchEventListAT.execute(location);
-    	Log.d("GPS", "location = " + location.getLatitude() + "-" + location.getLongitude());
+    	Log.d("WelcomeActivity", "location = " + location.getLatitude() + "-" + location.getLongitude());
     }
     
     /**
@@ -52,5 +61,46 @@ public class WelcomeActivity extends Activity {
         startActivity(intent);
 
     }
+
+	@Override
+	public void onLocationChanged(Location location) {
+		Log.d("WelcomeActivity", "Received new location, fetch events.");
+		fetchEventList(location);
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		Log.d("GeoLocationListener", "GPS provider disabled");
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		Log.d("GeoLocationListener", "GPS provider enabled");
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		Log.d("GeoLocationListener", "GPS status changed.");
+
+		// Do a switch case and debug the new state of the GPS
+		switch (status) {
+		case LocationProvider.AVAILABLE:
+			Log.d("GeoLocationListener", "GPS LocationProvider changed to available");
+			break;
+		case LocationProvider.TEMPORARILY_UNAVAILABLE:
+			Log.d("GeoLocationListener", "GPS LocationProvider changed to temporarily unavilable");
+			break;
+		case LocationProvider.OUT_OF_SERVICE:
+			Log.d("GeoLocationListener", "GPS LocationProvider changed to out of service");
+
+		}
+		
+	}
     
 }
