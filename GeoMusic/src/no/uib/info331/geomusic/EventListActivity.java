@@ -29,7 +29,6 @@ public class EventListActivity extends ListActivity {
         
         Log.d("EventListActivity", "Creating the activity");
         setContentView(R.layout.activity_event_list);
-        
         GeoConcertApplication application = (GeoConcertApplication) getApplication();
         PaginatedResult<Event> events = application.getEvents();
         Event[] eventArray = new Event[0];

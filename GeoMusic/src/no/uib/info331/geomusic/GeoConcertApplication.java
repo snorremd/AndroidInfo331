@@ -27,7 +27,7 @@ public class GeoConcertApplication extends Application {
 	/**
 	 * Private constructor. Is not to be called.
 	 */
-	private GeoConcertApplication() {
+	public GeoConcertApplication() {
 		super(); 
 	}
 
