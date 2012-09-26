@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import de.umass.lastfm.Event;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,8 @@ public class EventAdapter extends ArrayAdapter<Event> {
 		TextView eventArtistsTextView = (TextView) eventListViewItemRow.findViewById(R.id.eventArtistsTextView);
 		
 		String eventTitle = events[position].getTitle();
-		String dateAndTime = events[position].getStartDate() + " - " + events[position].getEndDate();
+		String dateAndTime = "" + events[position].getStartDate();
+        Log.d("getEndDate says", "" + events[position].getEndDate());
 		String artists = "";
 		ArrayList<String> artistList = new ArrayList<String>(events[position].getArtists());
 		int listSize = artistList.size();

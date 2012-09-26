@@ -40,10 +40,6 @@ public class EventListActivity extends ListActivity {
         
         //ListView eventListView = (ListView) findViewById(R.id.eventListView);
         setListAdapter(new EventAdapter(this,R.layout.eventlistview_item_row, eventArray));
-        
-        
-        
-        
     }
 
     @Override

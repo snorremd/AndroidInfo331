@@ -4,17 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-<!--     <ListView
-        android:id="@+id/eventListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView> -->
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/android:list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-    </ListView>    
-    
+    </ListView>
 
 </LinearLayout>
 <!-- http://www.vogella.com/articles/AndroidListView/article.html -->
