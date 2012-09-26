@@ -49,7 +49,9 @@ public class FetchEventListAsyncTask extends
 		double longitude=loc.getLongitude();
 		
 		Log.d("FetchEventList", "Get events with location: " + loc.getLatitude() + " : " + loc.getLongitude());
+
 		PaginatedResult<Event> events = GeoAndroid.getEvents(latitude,longitude,1, activity.getString(R.string.lastfm_api_key));
+
 		Log.d("DEBUG", "" + events.isEmpty());
 		return events;
 	}
