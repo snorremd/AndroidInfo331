@@ -1,15 +1,10 @@
 package no.uib.info331.geomusic;
 
-import java.security.Provider;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.location.Location;
 import android.location.LocationManager;
-import android.util.Log;
 import de.umass.lastfm.Event;
 import de.umass.lastfm.PaginatedResult;
 
@@ -61,5 +56,22 @@ public class GeoConcertApplication extends Application {
 	 */
 	public void setLocationManager(LocationManager locationManager) {
 		this.locationManager = locationManager;
+	}
+
+	/**
+	 * Function for get a specific event from the list
+	 * @param id
+	 * @return the searched event
+	 */
+	public Event findEvent(int id) {
+		/* Get iterator for search inside the list of the events */
+		Iterator i = this.events.iterator();
+		while(i.hasNext())
+		{
+			Event e = (Event) i.next();
+			if (e.getId() == id)
+				return e;
+		}
+		return null;
 	}
 }

@@ -34,6 +34,12 @@
     </LinearLayout>
 
     <TextView
+        android1:id="@+id/eventDescription"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:text="event description" />
+
+    <TextView
         android:id="@+id/artistsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
