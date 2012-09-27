@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <EditText android:id="@+building_list/search_box" 
+    <EditText android:id="@+id/search_box" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="type to filter"
