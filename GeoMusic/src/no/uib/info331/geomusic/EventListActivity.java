@@ -14,7 +14,8 @@ import de.umass.lastfm.Event;
 import de.umass.lastfm.PaginatedResult;
 
 public class EventListActivity extends ListActivity {
-
+	
+	Event[] eventArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,7 @@ public class EventListActivity extends ListActivity {
         setContentView(R.layout.activity_event_list);
         GeoConcertApplication application = (GeoConcertApplication) getApplication();
         PaginatedResult<Event> events = application.getEvents();
-        Event[] eventArray = new Event[0];
+        eventArray = new Event[0];
         if(events != null) {
         	ArrayList <Event> a = new ArrayList<Event>(events.getPageResults());
         	eventArray = (Event[]) a.toArray(new Event[a.size()]);
@@ -50,19 +51,27 @@ public class EventListActivity extends ListActivity {
     	GeoConcertApplication application = (GeoConcertApplication) getApplication();
     	
     	/* Searching the event relative to the item ==> probably can be optimize! */
-    	Iterator i = application.getEvents().iterator();
-    	int index = 0;
-    	while (i.hasNext())
-    	{
-    		Event e = (Event) i.next();
-    		if(index == id)
-    		{
-    			/* When the event is found, it creates an intent for calling the EventInfoActivity */
-    	        Intent intent = new Intent(this, EventInfoActivity.class);
-    	        intent.putExtra("id", e.getId()); //for the passage of the parameters, in this case only the id of the event
-    	        startActivity(intent);
-    		}
-    		index++;
-    	}
+//    	Iterator i = application.getEvents().iterator();
+//    	int index = 0;
+//    	while (i.hasNext())
+//    	{
+//    		Event e = (Event) i.next();
+//    		if(index == id)
+//    		{
+//    			/* When the event is found, it creates an intent for calling the EventInfoActivity */
+//    	        Intent intent = new Intent(this, EventInfoActivity.class);
+//    	        intent.putExtra("id", e.getId()); //for the passage of the parameters, in this case only the id of the event
+//    	        startActivity(intent);
+//    		}
+//    		index++;
+//    	}
+    	
+    	//this is better. Per
+    	Event e = (Event) eventArray[(int) id];
+    	
+        Intent intent = new Intent(this, EventInfoActivity.class);
+        intent.putExtra("id", e.getId()); //for the passage of the parameters, in this case only the id of the event
+        startActivity(intent);    	
+    	
     }
 }

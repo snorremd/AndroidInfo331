@@ -10,6 +10,9 @@ package no.uib.info331.geomusic;
 public final class R {
     public static final class attr {
     }
+    public static final class building_list {
+        public static final int search_box=0x7f080000;
+    }
     public static final class drawable {
         public static final int ic_action_search=0x7f020000;
         public static final int ic_launcher=0x7f020001;
