@@ -28,6 +28,7 @@ public class WelcomeActivity extends Activity implements LocationListener {
         application = ((GeoConcertApplication) getApplication());
         locManager = application.getLocationManager();
         locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        fetchEventList(locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
     }
 
     @Override
