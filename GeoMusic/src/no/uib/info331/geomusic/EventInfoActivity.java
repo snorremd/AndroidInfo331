@@ -1,10 +1,11 @@
 package no.uib.info331.geomusic;
 
-import java.util.Collection;
+import java.util.Iterator;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -21,15 +22,15 @@ public class EventInfoActivity extends Activity {
         GeoConcertApplication application = (GeoConcertApplication) getApplication();
 
         /* Catching intent for read the parameters */
-        Intent i = getIntent();
+        Intent intent = getIntent();
         
-        /* Reading the title of the event from the intent */
+        /* Reading the id of the event from the intent */
         int id;
-        id = i.getIntExtra("id", -1);
+        id = intent.getIntExtra("id", -1);
         
         if(id == -1)
         {
-        	/* error during the read of the parameters */
+        	Log.d("ERROR", "negative id");
         }
         else
         {
@@ -44,14 +45,23 @@ public class EventInfoActivity extends Activity {
             eventTimeStamp.setText(e.getStartDate().toString());
             
             TextView eventVenue = (TextView) findViewById(R.id.eventLocation);
-            eventVenue.setText(e.getVenue().toString());
+            eventVenue.setText(e.getVenue().getName() + " , " + e.getVenue().getStreet() + " @ " +e.getVenue().getCity());
             
             TextView eventDescription = (TextView) findViewById(R.id.eventDescription);
             eventDescription.setText(e.getDescription());
+
             
             ListView listView = (ListView) findViewById(R.id.artistList);
-            String[] values = (String[]) e.getArtists().toArray();
-
+            /* Copy of the artists in the array "values" for fill the listview */
+            Iterator i = e.getArtists().iterator();
+            String[] values =new String[e.getArtists().size()];
+            int j = 0;
+            while(i.hasNext())
+            {
+            	values[j] = (String) i.next();
+            	j++;
+            }
+            
             // First paramenter - Context
             // Second parameter - Layout for the row
             // Third parameter - ID of the TextView to which the data is written
@@ -59,7 +69,7 @@ public class EventInfoActivity extends Activity {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
               android.R.layout.simple_list_item_1, android.R.id.text1, values);
 
-            // Assign adapter to ListView
+            /* Assign adapter to ListView */
             listView.setAdapter(adapter); 
         }
     }

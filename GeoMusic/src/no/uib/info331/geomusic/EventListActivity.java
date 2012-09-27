@@ -1,25 +1,17 @@
 package no.uib.info331.geomusic;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Iterator;
 
-import de.umass.lastfm.Event;
-import de.umass.lastfm.PaginatedResult;
-
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
 import android.app.ListActivity;
-import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
+import de.umass.lastfm.Event;
+import de.umass.lastfm.PaginatedResult;
 
 public class EventListActivity extends ListActivity {
 
@@ -46,5 +38,31 @@ public class EventListActivity extends ListActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_event_list, menu);
         return true;
+    }
+    
+    /**
+     * Function for associate a specific behavior to the "click on an item in the list" action 
+     */
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+    	Log.d("infoList", "click on item"+id);
+    	
+    	GeoConcertApplication application = (GeoConcertApplication) getApplication();
+    	
+    	/* Searching the event relative to the item ==> probably can be optimize! */
+    	Iterator i = application.getEvents().iterator();
+    	int index = 0;
+    	while (i.hasNext())
+    	{
+    		Event e = (Event) i.next();
+    		if(index == id)
+    		{
+    			/* When the event is found, it creates an intent for calling the EventInfoActivity */
+    	        Intent intent = new Intent(this, EventInfoActivity.class);
+    	        intent.putExtra("id", e.getId()); //for the passage of the parameters, in this case only the id of the event
+    	        startActivity(intent);
+    		}
+    		index++;
+    	}
     }
 }

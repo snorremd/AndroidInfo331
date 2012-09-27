@@ -13,35 +13,30 @@
         android:text="Event Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <LinearLayout
-        android1:layout_width="match_parent"
-        android1:layout_height="wrap_content" >
-
+    
         <TextView
             android1:id="@+id/eventLocation"
-            android1:layout_width="wrap_content"
+            android1:layout_width="match_parent"
             android1:layout_height="wrap_content"
             android1:text="Brann stadion "
             android1:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android1:id="@+id/eventDateAndTime"
-            android1:layout_width="wrap_content"
+            android1:layout_width="match_parent"
             android1:layout_height="wrap_content"
             android1:text="kl 1745"
             android1:textAppearance="?android:attr/textAppearanceSmall" />
 
-    </LinearLayout>
-
     <TextView
         android1:id="@+id/eventDescription"
-        android1:layout_width="wrap_content"
+        android1:layout_width="match_parent"
         android1:layout_height="wrap_content"
         android1:text="event description" />
 
     <TextView
         android:id="@+id/artistsTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/artists"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -52,6 +47,6 @@
         android1:layout_height="118dp" >
     </ListView>
 
-
+   
 
 </LinearLayout>
