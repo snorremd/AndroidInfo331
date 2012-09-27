@@ -1,6 +1,7 @@
 package no.uib.info331.geomusic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import android.app.ListActivity;
@@ -39,9 +40,12 @@ public class EventListActivity extends ListActivity {
         	eventArray = (Event[]) a.toArray(new Event[a.size()]);
         	Log.d("EventListActivity", "" + a.size());
         }
+        ArrayList<Event> eventsArrayList = new ArrayList<Event>(Arrays.asList(eventArray));
+
+
         
         //ListView eventListView = (ListView) findViewById(R.id.eventListView);
-        setListAdapter(new EventAdapter(this,R.layout.eventlistview_item_row, eventArray));
+        setListAdapter(new EventAdapter(this,R.layout.eventlistview_item_row, eventsArrayList));
         
         
         //we create a textWatcher for searching in the list

@@ -17,9 +17,9 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 
 	Context context; 
     int layoutResourceId;
-    Event[] events;
+    ArrayList<Event> events;
     
-	public EventAdapter(Context context, int layoutResourceId, Event[] events) {
+	public EventAdapter(Context context, int layoutResourceId, ArrayList<Event> events) {
 		super(context, layoutResourceId, events);
 		this.context = context;
 		this.layoutResourceId = layoutResourceId;
@@ -40,10 +40,10 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 		TextView dateAndTimeTextView = (TextView) eventListViewItemRow.findViewById(R.id.eventDateAndTimeTextView);
 		TextView eventArtistsTextView = (TextView) eventListViewItemRow.findViewById(R.id.eventArtistsTextView);
 		
-		String eventTitle = events[position].getTitle();
-		String dateAndTime = "" + events[position].getStartDate();
+		String eventTitle = events.get(position).getTitle();
+		String dateAndTime = "" + events.get(position).getStartDate();
 		String artists = "";
-		ArrayList<String> artistList = new ArrayList<String>(events[position].getArtists());
+		ArrayList<String> artistList = new ArrayList<String>(events.get(position).getArtists());
 		int listSize = artistList.size();
 		for(int i = 0; i < listSize; i++) {
 			
@@ -74,43 +74,57 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 			protected FilterResults performFiltering(CharSequence constraint) {
 				String searchFor = constraint.toString().toLowerCase();
 
-                Event[] list = events.clone();
-            	Event[] newlist = new Event[events.length];
+                ArrayList<Event> list = (ArrayList<Event>) events.clone();
+                ArrayList<Event> newlist = new ArrayList<Event>();
             	FilterResults results = new FilterResults();            	
             	
             	
 	            if (searchFor == null || searchFor.length() == 0)
 	            {
 	                results.values = list;
-	                results.count = list.length;
+	                results.count = list.size();
 	            }
 	            
 	            else
 	            {
-	                int count = list.length;
-	                int added = 0;
-	                for (int i=0; i<count; i++)
-	                {
-	                    Event eventTreated = list[i];
-	                    newlist[added] = eventTreated;
-	                    added++;
-	                    //TODO add all info we want to filter on. for now only title.
-	                    String eventTitleAndArtists = eventTreated.getTitle().toLowerCase();
-	                    if(eventTitleAndArtists.indexOf(searchFor) != -1) {
-	                    	
-	                    }
-	                }
-	                results.values = newlist;
-	                results.count = newlist.length;
+	            	for(Event e : list) {
+	            		String eventTitleAndArtists = e.getTitle().toLowerCase();
+	            		if(eventTitleAndArtists.indexOf(searchFor) != -1) {
+	            			newlist.add(e);
+	            		}
+	            		}
+	            	}
+                results.values = newlist;
+                results.count = newlist.size();
+                
+                return results;
 	            }
+	            	
+//	            {
+//	                int count = list.size();
+//	                int added = 0;
+//	                for (int i=0; i<count; i++)
+//	                {
+//	                    Event eventTreated = list[i];
+//	                    newlist[added] = eventTreated;
+//	                    added++;
+//	                    //TODO add all info we want to filter on. for now only title.
+//	                    String eventTitleAndArtists = eventTreated.getTitle().toLowerCase();
+//	                    if(eventTitleAndArtists.indexOf(searchFor) != -1) {
+//	                    	
+//	                    }
+//	                }
+//	                results.values = newlist;
+//	                results.count = newlist.length;
+//	            }
 				
-				return results;
-			}
+				
 
 			@Override
 			protected void publishResults(CharSequence constraint,
 					FilterResults results) {
-				Event[] newlist = (Event[]) results.values;
+				@SuppressWarnings("unchecked")
+				ArrayList<Event> newlist = (ArrayList<Event>) results.values;
 				//TODO completely rewrite EventAdapter to use ArrayList
 				//http://stackoverflow.com/questions/10504353/adapter-clear-crashes-android-app
 				clear();
