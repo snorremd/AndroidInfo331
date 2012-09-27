@@ -17,6 +17,7 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 
 	Context context; 
     int layoutResourceId;
+    ArrayList<Event> initialEvents;
     ArrayList<Event> events;
     
 	public EventAdapter(Context context, int layoutResourceId, ArrayList<Event> events) {
@@ -24,6 +25,7 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 		this.context = context;
 		this.layoutResourceId = layoutResourceId;
 		this.events = events;
+		this.initialEvents = (ArrayList<Event>) events.clone();
 	}
 	
 	@Override
@@ -74,7 +76,7 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 			protected FilterResults performFiltering(CharSequence constraint) {
 				String searchFor = constraint.toString().toLowerCase();
 
-                ArrayList<Event> list = (ArrayList<Event>) events.clone();
+                ArrayList<Event> list = initialEvents;
                 ArrayList<Event> newlist = new ArrayList<Event>();
             	FilterResults results = new FilterResults();            	
             	
@@ -93,30 +95,12 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 	            			newlist.add(e);
 	            		}
 	            		}
+	                results.values = newlist;
+	                results.count = newlist.size();
 	            	}
-                results.values = newlist;
-                results.count = newlist.size();
                 
                 return results;
 	            }
-	            	
-//	            {
-//	                int count = list.size();
-//	                int added = 0;
-//	                for (int i=0; i<count; i++)
-//	                {
-//	                    Event eventTreated = list[i];
-//	                    newlist[added] = eventTreated;
-//	                    added++;
-//	                    //TODO add all info we want to filter on. for now only title.
-//	                    String eventTitleAndArtists = eventTreated.getTitle().toLowerCase();
-//	                    if(eventTitleAndArtists.indexOf(searchFor) != -1) {
-//	                    	
-//	                    }
-//	                }
-//	                results.values = newlist;
-//	                results.count = newlist.length;
-//	            }
 				
 				
 
