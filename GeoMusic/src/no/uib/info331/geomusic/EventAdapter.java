@@ -2,6 +2,7 @@ package no.uib.info331.geomusic;
 
 import java.util.ArrayList;
 
+import de.umass.lastfm.Artist;
 import de.umass.lastfm.Event;
 import android.content.Context;
 import android.util.Log;
@@ -75,7 +76,6 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
 				String searchFor = constraint.toString().toLowerCase();
-
                 ArrayList<Event> list = initialEvents;
                 ArrayList<Event> newlist = new ArrayList<Event>();
             	FilterResults results = new FilterResults();            	
@@ -90,8 +90,17 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 	            else
 	            {
 	            	for(Event e : list) {
-	            		String eventTitleAndArtists = e.getTitle().toLowerCase();
-	            		if(eventTitleAndArtists.indexOf(searchFor) != -1) {
+	            		String textToMatch = e.getTitle() + " " + e.getVenue().getName() + " ";
+	            			ArrayList<String> artists = new ArrayList<String>(e.getArtists());
+	            			StringBuilder sb = new StringBuilder(textToMatch);
+	            			
+	            			for(String a : artists) {
+	            				sb.append(a);
+	            				sb.append(" ");
+	            			}
+	            			textToMatch = sb.toString().toLowerCase();
+//	            			Log.d("EventAdapter", "" + textToMatch);
+	            		if(textToMatch.indexOf(searchFor) != -1) {
 	            			newlist.add(e);
 	            		}
 	            		}
@@ -109,8 +118,6 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 					FilterResults results) {
 				@SuppressWarnings("unchecked")
 				ArrayList<Event> newlist = (ArrayList<Event>) results.values;
-				//TODO completely rewrite EventAdapter to use ArrayList
-				//http://stackoverflow.com/questions/10504353/adapter-clear-crashes-android-app
 				clear();
 				for(Event e : newlist) {
 					add(e);
