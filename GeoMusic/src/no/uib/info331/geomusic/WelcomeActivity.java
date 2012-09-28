@@ -2,7 +2,10 @@ package no.uib.info331.geomusic;
 
 import no.uib.info331.geomusic.utils.FetchEventListAsyncTask;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -28,7 +31,11 @@ public class WelcomeActivity extends Activity implements LocationListener {
         application = ((GeoConcertApplication) getApplication());
         locManager = application.getLocationManager();
         locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        fetchEventList(locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
+        Location location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if(location != null) {
+        	fetchEventList(location);
+        }
+        
     }
 
     @Override
@@ -47,7 +54,7 @@ public class WelcomeActivity extends Activity implements LocationListener {
     	Log.d("WelcomeActivity", "Fetch events based on location: " + location);
     	FetchEventListAsyncTask fetchEventListAT = new FetchEventListAsyncTask(this);
         fetchEventListAT.execute(location);
-    	Log.d("WelcomeActivity", "location = " + location.getLatitude() + "-" + location.getLongitude());
+    	//Log.d("WelcomeActivity", "location = " + location.getLatitude() + "-" + location.getLongitude());
     }
     
     /**
