@@ -10,5 +10,7 @@
     <string name="lastfm_api_key">07230bd610a9af18c7e1f19d2da654f1</string>
     <string name="lastfm_secret">aee7a363ef03d2d0d6513e0eefaf903b</string>
     <string name="placeholder">Placeholder Text</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_artist_info">ArtistInfoActivity</string>
 
 </resources>
