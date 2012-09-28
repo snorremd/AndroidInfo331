@@ -5,6 +5,7 @@ import java.util.Iterator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
@@ -48,7 +49,8 @@ public class EventInfoActivity extends Activity {
             eventVenue.setText(e.getVenue().getName() + " , " + e.getVenue().getStreet() + " @ " +e.getVenue().getCity());
             
             TextView eventDescription = (TextView) findViewById(R.id.eventDescription);
-            eventDescription.setText(e.getDescription());
+            eventDescription.setText(Html.fromHtml(e.getDescription()).toString());
+            Log.d("EventInfoActivity eventDescription", "" + e.getDescription());
 
             
             ListView listView = (ListView) findViewById(R.id.artistList);

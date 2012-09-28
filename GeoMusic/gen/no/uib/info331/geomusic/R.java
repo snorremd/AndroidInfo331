@@ -18,15 +18,16 @@ public final class R {
         public static final int LinearLayout1=0x7f070000;
         public static final int artistList=0x7f070006;
         public static final int artistsTitle=0x7f070005;
-        public static final int eventArtistsTextView=0x7f07000a;
+        public static final int eventArtistsTextView=0x7f07000b;
         public static final int eventDateAndTime=0x7f070003;
-        public static final int eventDateAndTimeTextView=0x7f070009;
+        public static final int eventDateAndTimeTextView=0x7f07000a;
         public static final int eventDescription=0x7f070004;
         public static final int eventLocation=0x7f070002;
         public static final int eventName=0x7f070001;
-        public static final int eventTitleTextView=0x7f070008;
-        public static final int menu_settings=0x7f07000b;
-        public static final int welcomeText=0x7f070007;
+        public static final int eventTitleTextView=0x7f070009;
+        public static final int menu_settings=0x7f07000c;
+        public static final int search_box=0x7f070007;
+        public static final int welcomeText=0x7f070008;
     }
     public static final class layout {
         public static final int activity_event_info=0x7f030000;

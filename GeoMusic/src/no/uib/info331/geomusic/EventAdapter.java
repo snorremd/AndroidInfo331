@@ -2,6 +2,7 @@ package no.uib.info331.geomusic;
 
 import java.util.ArrayList;
 
+import de.umass.lastfm.Artist;
 import de.umass.lastfm.Event;
 import android.content.Context;
 import android.util.Log;
@@ -9,19 +10,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
-public class EventAdapter extends ArrayAdapter<Event> {
+public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 
 	Context context; 
     int layoutResourceId;
-    Event[] events;
+    ArrayList<Event> initialEvents;
+    ArrayList<Event> events;
     
-	public EventAdapter(Context context, int layoutResourceId, Event[] events) {
+	public EventAdapter(Context context, int layoutResourceId, ArrayList<Event> events) {
 		super(context, layoutResourceId, events);
 		this.context = context;
 		this.layoutResourceId = layoutResourceId;
 		this.events = events;
+		this.initialEvents = (ArrayList<Event>) events.clone();
 	}
 	
 	@Override
@@ -38,11 +43,10 @@ public class EventAdapter extends ArrayAdapter<Event> {
 		TextView dateAndTimeTextView = (TextView) eventListViewItemRow.findViewById(R.id.eventDateAndTimeTextView);
 		TextView eventArtistsTextView = (TextView) eventListViewItemRow.findViewById(R.id.eventArtistsTextView);
 		
-		String eventTitle = events[position].getTitle();
-		String dateAndTime = "" + events[position].getStartDate();
-        Log.d("getEndDate says", "" + events[position].getEndDate());
+		String eventTitle = events.get(position).getTitle();
+		String dateAndTime = "" + events.get(position).getStartDate();
 		String artists = "";
-		ArrayList<String> artistList = new ArrayList<String>(events[position].getArtists());
+		ArrayList<String> artistList = new ArrayList<String>(events.get(position).getArtists());
 		int listSize = artistList.size();
 		for(int i = 0; i < listSize; i++) {
 			
@@ -59,5 +63,73 @@ public class EventAdapter extends ArrayAdapter<Event> {
 		return eventListViewItemRow;
 		
 	}
+	
+	
+	@Override
+	/**
+	 * We override the getFilter method for filtering the text on the search box
+	 */
+	public Filter getFilter() {
+		//create a new filter
+		return new Filter() {
 
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				String searchFor = constraint.toString().toLowerCase();
+                ArrayList<Event> list = initialEvents;
+                ArrayList<Event> newlist = new ArrayList<Event>();
+            	FilterResults results = new FilterResults();            	
+            	
+            	
+	            if (searchFor == null || searchFor.length() == 0)
+	            {
+	                results.values = list;
+	                results.count = list.size();
+	            }
+	            
+	            else
+	            {
+	            	for(Event e : list) {
+	            		String textToMatch = e.getTitle() + " " + e.getVenue().getName() + " ";
+	            			ArrayList<String> artists = new ArrayList<String>(e.getArtists());
+	            			StringBuilder sb = new StringBuilder(textToMatch);
+	            			
+	            			for(String a : artists) {
+	            				sb.append(a);
+	            				sb.append(" ");
+	            			}
+	            			textToMatch = sb.toString().toLowerCase();
+//	            			Log.d("EventAdapter", "" + textToMatch);
+	            		if(textToMatch.indexOf(searchFor) != -1) {
+	            			newlist.add(e);
+	            		}
+	            		}
+	                results.values = newlist;
+	                results.count = newlist.size();
+	            	}
+                
+                return results;
+	            }
+				
+				
+
+			@Override
+			protected void publishResults(CharSequence constraint,
+					FilterResults results) {
+				@SuppressWarnings("unchecked")
+				ArrayList<Event> newlist = (ArrayList<Event>) results.values;
+				clear();
+				for(Event e : newlist) {
+					add(e);
+				}
+				notifyDataSetChanged();
+				
+				
+				
+			}
+			
+		};
+		
+	}
+	
 }
