@@ -12,5 +12,6 @@
     <string name="placeholder">Placeholder Text</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_artist_info">ArtistInfoActivity</string>
+    <string name="artist_summary_title">Summary</string>
 
 </resources>

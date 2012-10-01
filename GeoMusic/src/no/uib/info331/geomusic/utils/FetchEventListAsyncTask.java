@@ -8,7 +8,6 @@ import java.util.Map;
 import no.uib.info331.geomusic.GeoConcertApplication;
 import no.uib.info331.geomusic.R;
 import no.uib.info331.geomusic.WelcomeActivity;
-import no.uib.info331.geomusic.lastfm.GeoAndroid;
 import android.app.Activity;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -23,10 +22,6 @@ import de.umass.util.MapUtilities;
 
 public class FetchEventListAsyncTask extends
 		AsyncTask<Location, Integer, PaginatedResult<Event>> {
-	
-
-	
-	//LocationManager locManager;
 
 	Activity activity;
 	
@@ -35,11 +30,12 @@ public class FetchEventListAsyncTask extends
 		this.activity = activity;
 	}
 
-	@Override
-	protected void onPreExecute() {
-		// TODO Auto-generated method stub
-		super.onPreExecute();
-	}
+// TODO Remove this one if things work without it
+//	@Override
+//	protected void onPreExecute() {
+//		// TODO Auto-generated method stub
+//		super.onPreExecute();
+//	}
 	
 	@Override
 	protected PaginatedResult<Event> doInBackground(Location... locations) {
@@ -50,7 +46,7 @@ public class FetchEventListAsyncTask extends
 			
 			Log.d("FetchEventList", "Get events with location: " + loc.getLatitude() + " : " + loc.getLongitude());
 
-			PaginatedResult<Event> events = GeoAndroid.getEvents(latitude,longitude,1, activity.getString(R.string.lastfm_api_key));
+			PaginatedResult<Event> events = Geo.getEvents(latitude,longitude,1, activity.getString(R.string.lastfm_api_key));
 
 			Log.d("DEBUG", "" + events.isEmpty());
 			return events;

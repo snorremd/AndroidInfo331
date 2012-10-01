@@ -81,7 +81,6 @@ public class EventListActivity extends ListActivity {
     public void onListItemClick(ListView l, View v, int position, long id) {
     	Log.d("infoList", "click on item"+id);
     	
-    	GeoConcertApplication application = (GeoConcertApplication) getApplication();
     	Event e = eventsAL.get(position);
     	
         Intent intent = new Intent(this, EventInfoActivity.class);
