@@ -6,6 +6,7 @@ import java.net.URL;
 import no.uib.info331.geomusic.utils.FetchArtistAsyncTask;
 
 import de.umass.lastfm.Artist;
+import de.umass.lastfm.ImageSize;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -41,7 +42,7 @@ public class ArtistInfoActivity extends Activity {
 		ImageView artistImage = (ImageView)findViewById(R.id.artist_image);
 		
 		try {
-	        InputStream is = (InputStream) new URL(result.getImageURL(null)).getContent();
+	        InputStream is = (InputStream) new URL(result.getImageURL(ImageSize.LARGE)).getContent();
 	        Drawable d = Drawable.createFromStream(is, "Last.fm");
 	        artistImage.setImageDrawable(d);
 	    } catch (Exception e) {
