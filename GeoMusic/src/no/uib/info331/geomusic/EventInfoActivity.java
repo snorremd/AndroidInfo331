@@ -3,6 +3,8 @@ package no.uib.info331.geomusic;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,7 +44,7 @@ public class EventInfoActivity extends Activity {
 		} else {
 			/* Finding the event from the list */
 			final Event e = application.findEvent(id);
-			
+
 			/* Setting the activity field */
 			TextView eventTitle = (TextView) findViewById(R.id.eventName);
 			eventTitle.setText(e.getTitle());
@@ -89,6 +91,45 @@ public class EventInfoActivity extends Activity {
 					Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
 					Uri.parse("http://maps.google.com/maps?saddr="+application.getLocation().getLatitude()+","+application.getLocation().getLongitude()+"&daddr="+eventLatitude+","+eventLongitude));
 					startActivity(intent);
+				}
+			});
+			
+			findViewById(R.id.addToCalendarButton).setOnClickListener(new OnClickListener() {
+				
+			@Override
+			public void onClick(View v) {
+					
+					try {
+						long eventStartInMillis = e.getStartDate().getTime();
+						long eventEndInMillis = e.getStartDate().getTime() + 60*60*1000;
+						
+						Intent intent = new Intent(Intent.ACTION_EDIT);
+						intent.setType("vnd.android.cursor.item/event");
+						
+						intent.putExtra("title", e.getTitle());
+						intent.putExtra("description", e.getDescription());
+						intent.putExtra("beginTime", eventStartInMillis);
+						intent.putExtra("endTime", eventEndInMillis);
+						startActivity(intent);
+					}
+					catch(Exception e) {
+						AlertDialog alertDialog = new AlertDialog.Builder(EventInfoActivity.this).setNegativeButton("Take me back", new DialogInterface.OnClickListener() {
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.cancel();
+								
+							}
+						}).create();
+						alertDialog.setTitle("No calendar");
+						alertDialog.setMessage("No calendar found");
+						alertDialog.show();
+					}
+
+
+
+
+					
 				}
 			});
 		}
