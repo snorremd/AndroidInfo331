@@ -73,8 +73,10 @@ public class WelcomeActivity extends Activity implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		Log.d("WelcomeActivity", "Received new location, fetch events.");
-		fetchEventList(location);
 		
+		/* Saving the location for source location to take the direction */
+		application.setLocation(location);
+		fetchEventList(location);
 	}
 
 	@Override

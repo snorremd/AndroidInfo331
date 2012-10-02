@@ -1,10 +1,12 @@
 package no.uib.info331.geomusic;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import de.umass.lastfm.Event;
@@ -28,7 +31,7 @@ public class EventInfoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_info);
 
-		GeoConcertApplication application = (GeoConcertApplication) getApplication();
+		final GeoConcertApplication application = (GeoConcertApplication) getApplication();
 
 		//Catching intent for read the parameters
 		Intent intent = getIntent();
@@ -40,7 +43,7 @@ public class EventInfoActivity extends Activity {
 			Log.d("ERROR", "negative id");
 		} else {
 			/* Finding the event from the list */
-			Event e = application.findEvent(id);
+			final Event e = application.findEvent(id);
 
 			/* Setting the activity field */
 			TextView eventTitle = (TextView) findViewById(R.id.eventName);
@@ -71,6 +74,62 @@ public class EventInfoActivity extends Activity {
 					Intent intent = new Intent(EventInfoActivity.this, ArtistInfoActivity.class);
 					intent.putExtra("ArtistName", artist);
 					startActivity(intent);
+				}
+			});
+			
+			Button mapButton = (Button) findViewById(R.id.eventDirection);
+			mapButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+
+					/* Used the event location for the destination location */
+					Double eventLatitude = (double) e.getVenue().getLatitude();
+					Double eventLongitude = (double) e.getVenue().getLongitude();
+					
+					/* Used the application to get the actual location for the source location */
+					Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
+					Uri.parse("http://maps.google.com/maps?saddr="+application.getLocation().getLatitude()+","+application.getLocation().getLongitude()+"&daddr="+eventLatitude+","+eventLongitude));
+					startActivity(intent);
+				}
+			});
+			
+			findViewById(R.id.addToCalendarButton).setOnClickListener(new OnClickListener() {
+				
+			@Override
+			public void onClick(View v) {
+					
+					try {
+						long eventStartInMillis = e.getStartDate().getTime();
+						long eventEndInMillis = e.getStartDate().getTime() + 60*60*1000;
+						
+						Intent intent = new Intent(Intent.ACTION_EDIT);
+						intent.setType("vnd.android.cursor.item/event");
+						
+						intent.putExtra("title", e.getTitle());
+						intent.putExtra("description", e.getDescription());
+						intent.putExtra("beginTime", eventStartInMillis);
+						intent.putExtra("endTime", eventEndInMillis);
+						startActivity(intent);
+					}
+					catch(Exception e) {
+						AlertDialog alertDialog = new AlertDialog.Builder(EventInfoActivity.this).setNegativeButton("Take me back", new DialogInterface.OnClickListener() {
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.cancel();
+								
+							}
+						}).create();
+						alertDialog.setTitle("No calendar");
+						alertDialog.setMessage("No calendar found");
+						alertDialog.show();
+					}
+
+
+
+
+					
 				}
 			});
 		}
