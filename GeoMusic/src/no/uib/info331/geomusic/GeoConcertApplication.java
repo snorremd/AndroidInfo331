@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import android.app.Application;
 import android.content.Context;
+import android.location.Location;
 import android.location.LocationManager;
 import de.umass.lastfm.Event;
 import de.umass.lastfm.PaginatedResult;
@@ -14,6 +15,7 @@ public class GeoConcertApplication extends Application {
 	/* list of the events */
 	private PaginatedResult<Event> events;
 	private LocationManager locationManager;
+	private Location location;
 	
 	/**
 	 * Private constructor. Is not to be called.
@@ -73,5 +75,13 @@ public class GeoConcertApplication extends Application {
 				return e;
 		}
 		return null;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 }
