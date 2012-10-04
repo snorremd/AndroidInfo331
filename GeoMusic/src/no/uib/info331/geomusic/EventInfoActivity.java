@@ -172,9 +172,9 @@ public class EventInfoActivity extends Activity {
 		super.onPause();
 		Log.d("log", "onPause");
 
-		GeoConcertApplication application = (GeoConcertApplication)getApplication();
-		if(application.getEvents() != null)
-			application.writeObject();
+//		GeoConcertApplication application = (GeoConcertApplication)getApplication();
+//		if(application.getEvents() != null)
+//			application.writeObject();
 	}
 
 	@Override
@@ -182,7 +182,7 @@ public class EventInfoActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onRestart();
 		Log.d("log", "onRestart");
-
+		
 		GeoConcertApplication application = (GeoConcertApplication)getApplication();
 		if(application.getEvents() == null)
 			application.readObject();
@@ -205,9 +205,9 @@ public class EventInfoActivity extends Activity {
 		super.onStop();
 		Log.d("log", "onStop");
 		
-		GeoConcertApplication application = (GeoConcertApplication)getApplication();
-		if(application.getEvents() == null)
-			application.writeObject();
+//		GeoConcertApplication application = (GeoConcertApplication)getApplication();
+//		if(application.getEvents() == null)
+//			application.writeObject();
 	}
 	
 }

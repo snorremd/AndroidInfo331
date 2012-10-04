@@ -58,7 +58,7 @@ public class GeoConcertApplication extends Application {
 	 * 
 	 * @param result
 	 */
-	public void setEvents(PaginatedResult<Event> result) {
+	public void createEvents(PaginatedResult<Event> result) {
 		if (result != null) {
 			/* Get iterator for search inside the list of the events */
 			Iterator i = result.iterator();
