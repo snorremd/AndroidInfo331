@@ -34,9 +34,8 @@ public class EventListActivity extends ListActivity {
         Log.d("EventListActivity", "Creating the activity");
         setContentView(R.layout.activity_event_list);
         GeoConcertApplication application = (GeoConcertApplication) getApplication();
-        PaginatedResult<Event> events = application.getEvents();
-        if(events != null) {
-        	eventsAL = new ArrayList<Event>(events.getPageResults());
+        if(application.getEvents() != null) {
+        	eventsAL = application.getEvents();
         	Log.d("EventListActivity", "" + eventsAL.size());
         }
         
@@ -88,4 +87,51 @@ public class EventListActivity extends ListActivity {
         startActivity(intent);    	
     	
     }
+    
+	/* new code for save the data */
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		Log.d("log", "onPause");
+
+		GeoConcertApplication application = (GeoConcertApplication)getApplication();
+		if(application.getEvents() != null)
+			application.writeObject();
+	}
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		Log.d("log", "onRestart");
+
+		GeoConcertApplication application = (GeoConcertApplication)getApplication();
+		if(application.getEvents() == null)
+			application.readObject();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		Log.d("log", "onResume");
+
+		GeoConcertApplication application = (GeoConcertApplication)getApplication();
+		if(application.getEvents() == null)
+			application.readObject();
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		Log.d("log", "onStop");
+		
+		GeoConcertApplication application = (GeoConcertApplication)getApplication();
+		if(application.getEvents() == null)
+			application.writeObject();
+	}
+
 }
