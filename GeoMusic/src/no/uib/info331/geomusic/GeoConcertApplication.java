@@ -27,7 +27,6 @@ public class GeoConcertApplication extends Application {
 
 	/* list of the events */
 	private ArrayList<Event> newevents;
-//	private PaginatedResult<Event> events;
 	private LocationManager locationManager;
 	private Location location;
 
@@ -116,24 +115,6 @@ public class GeoConcertApplication extends Application {
 		this.location = location;
 	}
 
-	public void saveData() {
-		String FILENAME = "hello_file";
-		String string = "hello world!";
-
-		FileOutputStream fos;
-		try {
-			fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-			fos.write(string.getBytes());
-			fos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public void writeObject() {
 		String FILENAME = "events";
 
@@ -182,34 +163,5 @@ public class GeoConcertApplication extends Application {
 
 	}
 
-	public byte[] readData() {
-		String FILENAME = "hello_file";
-		ArrayList<Byte> ret = new ArrayList<Byte>();
 
-		FileInputStream fis;
-
-		try {
-			fis = openFileInput(FILENAME);
-
-			Integer app = 0;
-			while (app != -1) {
-				app = fis.read();
-				ret.add(app.byteValue());
-			}
-
-			fis.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		byte[] array = new byte[ret.size()];
-		for (int i = 0; i < ret.size(); i++) {
-			array[i] = ret.get(i);
-		}
-		return array;
-	}
 }
