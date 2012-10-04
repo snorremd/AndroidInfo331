@@ -1,10 +1,5 @@
 package no.uib.info331.geomusic.utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import no.uib.info331.geomusic.GeoConcertApplication;
 import no.uib.info331.geomusic.R;
 import no.uib.info331.geomusic.WelcomeActivity;
@@ -12,13 +7,9 @@ import android.app.Activity;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
-import de.umass.lastfm.Caller;
 import de.umass.lastfm.Event;
 import de.umass.lastfm.Geo;
 import de.umass.lastfm.PaginatedResult;
-import de.umass.lastfm.ResponseBuilder;
-import de.umass.lastfm.Result;
-import de.umass.util.MapUtilities;
 
 public class FetchEventListAsyncTask extends
 		AsyncTask<Location, Integer, PaginatedResult<Event>> {
@@ -29,13 +20,6 @@ public class FetchEventListAsyncTask extends
 		super();
 		this.activity = activity;
 	}
-
-// TODO Remove this one if things work without it
-//	@Override
-//	protected void onPreExecute() {
-//		// TODO Auto-generated method stub
-//		super.onPreExecute();
-//	}
 	
 	@Override
 	protected PaginatedResult<Event> doInBackground(Location... locations) {
@@ -55,7 +39,6 @@ public class FetchEventListAsyncTask extends
 	
 	@Override
 	protected void onPostExecute(PaginatedResult<Event> result) {
-		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 		GeoConcertApplication app = (GeoConcertApplication) activity.getApplication();
 		app.setEvents(result);
@@ -63,7 +46,6 @@ public class FetchEventListAsyncTask extends
 			
 			((WelcomeActivity) activity).showEventListActivity();
 		}
-		
 	}
 	
 	@Override

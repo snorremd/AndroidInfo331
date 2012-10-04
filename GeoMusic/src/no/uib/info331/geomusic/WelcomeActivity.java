@@ -13,6 +13,7 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.Button;
 
 public class WelcomeActivity extends Activity implements LocationListener {
 	
