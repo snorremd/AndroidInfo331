@@ -34,12 +34,12 @@ public class WelcomeActivity extends Activity implements LocationListener {
         locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         /* the follow line works only on a phone!! */
 //        locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-
-//        Location location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//        if(location != null) {
-//        	application.setLocation(location);
-//        	fetchEventList(location);
-//        }
+        //the following lines are needed for the welcomeactivity not to wait for updates and run immediately
+        Location location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if(location != null) {
+        	application.setLocation(location);
+        	fetchEventList(location);
+        }
         
     }
 
