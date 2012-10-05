@@ -41,7 +41,7 @@ public class FetchEventListAsyncTask extends
 	protected void onPostExecute(PaginatedResult<Event> result) {
 		super.onPostExecute(result);
 		GeoConcertApplication app = (GeoConcertApplication) activity.getApplication();
-		app.setEvents(result);
+		app.createEvents(result);
 		if(activity instanceof WelcomeActivity) {
 			
 			((WelcomeActivity) activity).showEventListActivity();
