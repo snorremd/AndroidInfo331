@@ -5,54 +5,70 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/artist_name"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/artist_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5" />
+            <TextView
+                android:id="@+id/artist_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/artist_summary_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/artist_summary_title"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <ImageView
+                android:id="@+id/artist_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:orientation="vertical" >
+            <TextView
+                android:id="@+id/artist_summary_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/artist_summary_title"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/artist_summary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/artist_summary_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/popularTracks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PlayPopularTracks" />
+                <Button
+                    android:id="@+id/popularTracks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/play_most_popular_song" />
 
-        <Button
-            android:id="@+id/artistsOnSpotify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GetArtist" />
+                <Button
+                    android:id="@+id/artistsOnSpotify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/open_artist" />
 
-        <Button
-            android:id="@+id/popularTracks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PlayPopularTracks" />
+                <Button
+                    android:id="@+id/findSimilarArtists"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/find_similar" />
+                 <Button
+                    android:id="@+id/findEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/find_events" />
+            </LinearLayout>
+        </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

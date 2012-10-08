@@ -13,5 +13,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_artist_info">ArtistInfoActivity</string>
     <string name="artist_summary_title">Summary</string>
+    <string name="play_most_popular_song">Play most popular song</string>
+    <string name="open_artist">Open artist</string>
+    <string name="find_similar">Find similar</string>
+    <string name="title_activity_similar_artists">SimilarArtistsActivity</string>
+    <string name="find_events">Find events</string>
 
 </resources>

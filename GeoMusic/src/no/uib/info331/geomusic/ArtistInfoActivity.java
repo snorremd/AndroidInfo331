@@ -5,10 +5,13 @@ import java.net.URL;
 
 import no.uib.info331.geomusic.utils.FetchArtistAsyncTask;
 import no.uib.info331.geomusic.utils.FetchEventListAsyncTask;
+import no.uib.info331.geomusic.utils.FetchEventsForArtistAsyncTask;
 import no.uib.info331.geomusic.utils.FetchPopularTrackTask;
 
 import de.umass.lastfm.Artist;
+import de.umass.lastfm.Event;
 import de.umass.lastfm.ImageSize;
+import de.umass.lastfm.PaginatedResult;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -79,6 +82,31 @@ public class ArtistInfoActivity extends Activity {
 			}
 		});
         
+        Button similarArtistsButton = (Button)findViewById(R.id.findSimilarArtists);
+        similarArtistsButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Intent intent = new Intent(ArtistInfoActivity.this, SimilarArtistsActivity.class);
+				intent.putExtra("ArtistName", artist);
+				startActivity(intent);
+			}
+		});
+        
+        Button findEventsButton = (Button)findViewById(R.id.findEvents);
+        findEventsButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				FetchEventsForArtistAsyncTask fetchEvents = 
+						new FetchEventsForArtistAsyncTask(ArtistInfoActivity.this);
+				
+				fetchEvents.execute(artist);
+			}
+		});
+        
     }
 
     @Override
@@ -128,5 +156,10 @@ public class ArtistInfoActivity extends Activity {
 		
 		
 	
+	}
+
+	public void showEventListActivity() {
+		Intent intent = new Intent(this, EventListActivity.class);
+        startActivity(intent);
 	}
 }
