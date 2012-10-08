@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import no.uib.info331.geomusic.R;
+import no.uib.info331.geomusic.SimilarArtistsActivity;
 
 import de.umass.lastfm.Artist;
 import de.umass.lastfm.Event;
@@ -36,6 +37,11 @@ public class FetchSimilarArtistsAsyncTask extends
 	protected void onPostExecute(Collection<Artist> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
+		
+		// TODO Throw exception (WrongActivityException) on else
+		if(activity instanceof SimilarArtistsActivity) {
+			((SimilarArtistsActivity) activity).showSimilarArtists(result);
+		}
 		
 	}
 		

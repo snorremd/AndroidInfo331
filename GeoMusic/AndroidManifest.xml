@@ -39,6 +39,11 @@
             android:name=".ArtistInfoActivity"
             android:label="@string/title_activity_artist_info" >
         </activity>
+        <activity
+            android:name=".SimilarArtistsActivity"
+            android:label="@string/title_activity_similar_artists" >
+
+        </activity>
     </application>
 
 </manifest>

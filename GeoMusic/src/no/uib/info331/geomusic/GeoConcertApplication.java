@@ -26,7 +26,7 @@ public class GeoConcertApplication extends Application {
 	// private static GeoConcertApplication singleton;
 
 	/* list of the events */
-	private ArrayList<Event> newevents;
+	private ArrayList<Event> events;
 	private LocationManager locationManager;
 	private Location location;
 
@@ -35,7 +35,7 @@ public class GeoConcertApplication extends Application {
 	 */
 	public GeoConcertApplication() {
 		super();
-		this.newevents = new ArrayList<Event>();
+		this.events = new ArrayList<Event>();
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class GeoConcertApplication extends Application {
 	 * @param result
 	 */
 	public void setEvents(ArrayList<Event> result) {
-		this.newevents = result;
+		this.events = result;
 	}
 
 
@@ -59,18 +59,19 @@ public class GeoConcertApplication extends Application {
 	 * @param result
 	 */
 	public void createEvents(PaginatedResult<Event> result) {
+		events.clear();
 		if (result != null) {
 			/* Get iterator for search inside the list of the events */
-			Iterator i = result.iterator();
+			Iterator<Event> i = result.iterator();
 			while (i.hasNext()) {
-				this.newevents.add((Event) i.next());
+				this.events.add((Event) i.next());
 			}
 		}
 	}
 	
 	public ArrayList<Event> getEvents()
 	{
-		return this.newevents;
+		return this.events;
 	}
 	
 	/**
@@ -95,13 +96,13 @@ public class GeoConcertApplication extends Application {
 	 * @return the searched event
 	 */
 	public Event findEvent(int id) {
-		if (this.newevents != null) {
+		if (this.events != null) {
 			/* Get iterator for search inside the list of the events */
 			
-			for(int i=0; i<this.newevents.size(); i++)
+			for(int i=0; i<this.events.size(); i++)
 			{
-				if (this.newevents.get(i).getId() == id)
-					return this.newevents.get(i);
+				if (this.events.get(i).getId() == id)
+					return this.events.get(i);
 			}
 		}
 		return null;
@@ -123,7 +124,7 @@ public class GeoConcertApplication extends Application {
 
 			ObjectOutput out = new ObjectOutputStream(bos);
 			
-			out.writeObject(this.newevents);
+			out.writeObject(this.events);
 			byte[] buf = bos.toByteArray();
 
 			FileOutputStream fos = this.openFileOutput(FILENAME,
@@ -145,7 +146,7 @@ public class GeoConcertApplication extends Application {
 		try {
 			fis = openFileInput(FILENAME);
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			this.newevents = (ArrayList<Event>) ois.readObject();
+			this.events = (ArrayList<Event>) ois.readObject();
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
