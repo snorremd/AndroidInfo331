@@ -1,24 +1,18 @@
-package no.uib.info331.geomusic;
+package no.uib.info331.geoconcert;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SyncStateContract.Constants;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Filterable;
 import android.widget.ListView;
 import de.umass.lastfm.Event;
-import de.umass.lastfm.PaginatedResult;
 
 public class EventListActivity extends ListActivity {
 	

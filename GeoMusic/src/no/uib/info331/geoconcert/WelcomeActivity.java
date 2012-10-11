@@ -1,7 +1,7 @@
-package no.uib.info331.geomusic;
+package no.uib.info331.geoconcert;
 
-import no.uib.info331.geomusic.utils.FetchEventFavoriteArtistsAsyncTask;
-import no.uib.info331.geomusic.utils.FetchEventListAsyncTask;
+import no.uib.info331.geoconcert.utils.FetchEventFavoriteArtistsAsyncTask;
+import no.uib.info331.geoconcert.utils.FetchEventListAsyncTask;
 import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;

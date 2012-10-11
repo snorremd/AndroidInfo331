@@ -1,26 +1,20 @@
-package no.uib.info331.geomusic;
+package no.uib.info331.geoconcert;
 
 import java.io.InputStream;
 import java.net.URL;
 
-import no.uib.info331.geomusic.utils.FetchArtistAsyncTask;
-import no.uib.info331.geomusic.utils.FetchEventListAsyncTask;
-import no.uib.info331.geomusic.utils.FetchEventsForArtistAsyncTask;
-import no.uib.info331.geomusic.utils.FetchPopularTrackTask;
-
-import de.umass.lastfm.Artist;
-import de.umass.lastfm.Event;
-import de.umass.lastfm.ImageSize;
-import de.umass.lastfm.PaginatedResult;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
+import no.uib.info331.geoconcert.utils.FetchArtistAsyncTask;
+import no.uib.info331.geoconcert.utils.FetchEventsForArtistAsyncTask;
+import no.uib.info331.geoconcert.utils.FetchPopularTrackTask;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -29,6 +23,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import de.umass.lastfm.Artist;
+import de.umass.lastfm.ImageSize;
 
 public class ArtistInfoActivity extends Activity {
 	

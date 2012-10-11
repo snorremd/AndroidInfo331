@@ -1,16 +1,13 @@
-package no.uib.info331.geomusic.utils;
+package no.uib.info331.geoconcert.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import no.uib.info331.geomusic.R;
-import no.uib.info331.geomusic.SimilarArtistsActivity;
-
-import de.umass.lastfm.Artist;
-import de.umass.lastfm.Event;
-import de.umass.lastfm.PaginatedResult;
+import no.uib.info331.geoconcert.R;
+import no.uib.info331.geoconcert.SimilarArtistsActivity;
 import android.app.Activity;
 import android.os.AsyncTask;
+import de.umass.lastfm.Artist;
 
 public class FetchSimilarArtistsAsyncTask extends
 		AsyncTask<String, Integer, Collection<Artist>> {

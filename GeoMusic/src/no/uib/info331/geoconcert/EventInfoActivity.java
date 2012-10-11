@@ -1,4 +1,4 @@
-package no.uib.info331.geomusic;
+package no.uib.info331.geoconcert;
 
 import java.util.ArrayList;
 

@@ -1,15 +1,10 @@
-package no.uib.info331.geomusic.utils;
+package no.uib.info331.geoconcert.utils;
 
-import no.uib.info331.geomusic.ArtistInfoActivity;
-import no.uib.info331.geomusic.GeoConcertApplication;
-import no.uib.info331.geomusic.R;
-import no.uib.info331.geomusic.WelcomeActivity;
-import de.umass.lastfm.Artist;
-import de.umass.lastfm.Event;
-import de.umass.lastfm.PaginatedResult;
+import no.uib.info331.geoconcert.ArtistInfoActivity;
+import no.uib.info331.geoconcert.R;
 import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
+import de.umass.lastfm.Artist;
 
 public class FetchArtistAsyncTask extends AsyncTask<String, Integer, Artist> {
 

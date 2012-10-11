@@ -1,20 +1,13 @@
-package no.uib.info331.geomusic.utils;
+package no.uib.info331.geoconcert.utils;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import no.uib.info331.geomusic.GeoConcertApplication;
-
-import no.uib.info331.geomusic.ArtistInfoActivity;
-import no.uib.info331.geomusic.R;
-import no.uib.info331.geomusic.WelcomeActivity;
-
+import no.uib.info331.geoconcert.ArtistInfoActivity;
+import no.uib.info331.geoconcert.R;
 import android.app.Activity;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 import de.umass.lastfm.Artist;
-import de.umass.lastfm.Event;
-import de.umass.lastfm.PaginatedResult;
 import de.umass.lastfm.Track;
 public class FetchPopularTrackTask extends
 AsyncTask<String, Integer, Collection<Track>> {

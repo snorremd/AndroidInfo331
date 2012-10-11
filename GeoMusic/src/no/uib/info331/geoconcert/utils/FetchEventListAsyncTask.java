@@ -1,8 +1,8 @@
-package no.uib.info331.geomusic.utils;
+package no.uib.info331.geoconcert.utils;
 
-import no.uib.info331.geomusic.GeoConcertApplication;
-import no.uib.info331.geomusic.R;
-import no.uib.info331.geomusic.WelcomeActivity;
+import no.uib.info331.geoconcert.GeoConcertApplication;
+import no.uib.info331.geoconcert.R;
+import no.uib.info331.geoconcert.WelcomeActivity;
 import android.app.Activity;
 import android.location.Location;
 import android.os.AsyncTask;

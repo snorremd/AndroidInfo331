@@ -1,4 +1,4 @@
-package no.uib.info331.geomusic;
+package no.uib.info331.geoconcert;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -11,7 +11,6 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 
 import android.app.Application;

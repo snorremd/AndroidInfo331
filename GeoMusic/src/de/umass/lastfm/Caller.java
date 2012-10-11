@@ -26,27 +26,39 @@
 
 package de.umass.lastfm;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
+import static de.umass.util.StringUtilities.encode;
+import static de.umass.util.StringUtilities.map;
+import static de.umass.util.StringUtilities.md5;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.Proxy;
 import java.net.URL;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import de.umass.lastfm.Result.Status;
-import de.umass.lastfm.cache.Cache;
-import de.umass.lastfm.cache.FileSystemCache;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import static de.umass.util.StringUtilities.*;
+import de.umass.lastfm.Result.Status;
+import de.umass.lastfm.cache.Cache;
 
 /**
  * The <code>Caller</code> class handles the low-level communication between the client and last.fm.<br/>
