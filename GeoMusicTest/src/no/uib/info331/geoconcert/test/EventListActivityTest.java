@@ -1,6 +1,6 @@
-package no.uib.info331.geomusic.test;
+package no.uib.info331.geoconcert.test;
 
-import no.uib.info331.geomusic.EventListActivity;
+import no.uib.info331.geoconcert.EventListActivity;
 import android.test.ActivityInstrumentationTestCase2;
 
 public class EventListActivityTest extends

@@ -1,6 +1,6 @@
-package no.uib.info331.geomusic.test;
+package no.uib.info331.geoconcert.test;
 
-import no.uib.info331.geomusic.WelcomeActivity;
+import no.uib.info331.geoconcert.WelcomeActivity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 
@@ -19,12 +19,12 @@ public class WelcomeActivityTest extends
 		setActivityInitialTouchMode(false);
 		
 		mWelcomeActivity = getActivity();
-		mTextView = (TextView) mWelcomeActivity.findViewById(no.uib.info331.geomusic.R.id.welcomeText);
+		mTextView = (TextView) mWelcomeActivity.findViewById(no.uib.info331.geoconcert.R.id.welcomeText);
 	}
 	
 	public void testPreCondition() {
 		
-		String appName =  mWelcomeActivity.getString(no.uib.info331.geomusic.R.string.app_name);
+		String appName =  mWelcomeActivity.getString(no.uib.info331.geoconcert.R.string.app_name);
 		assertEquals(appName, mTextView.getText());
 	}
 
