@@ -18,5 +18,7 @@
     <string name="find_similar">Find similar</string>
     <string name="title_activity_similar_artists">SimilarArtistsActivity</string>
     <string name="find_events">Find events</string>
+    <string name="user">acresta88</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>

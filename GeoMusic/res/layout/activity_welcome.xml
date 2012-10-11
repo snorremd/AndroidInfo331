@@ -10,6 +10,27 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/app_name"
-        tools:context=".WelcomeActivity" />07230bd610a9af18c7e1f19d2da654f107230bd610a9af18c7e1f19d2da654f107230bd610a9af18c7e1f19d2da654f1
+        tools:context=".WelcomeActivity" />
+
+    <Button
+        android:id="@+id/favorite_artist_events_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="37dp"
+        android:text="favorite artist events" />
+
+    <Button
+        android:id="@+id/near_events_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/favorite_artist_events_button"
+        android:layout_marginTop="16dp"
+        android:text="nearby events" />
+
 
 </RelativeLayout>

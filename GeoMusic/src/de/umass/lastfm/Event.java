@@ -26,10 +26,16 @@
 
 package de.umass.lastfm;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import de.umass.util.MapUtilities;
 import de.umass.xml.DomElement;
@@ -39,7 +45,7 @@ import de.umass.xml.DomElement;
  *
  * @author Janni Kovacs
  */
-public class Event extends ImageHolder {
+public class Event extends ImageHolder implements Serializable{
 
 	static final ItemFactory<Event> FACTORY = new EventFactory();
 

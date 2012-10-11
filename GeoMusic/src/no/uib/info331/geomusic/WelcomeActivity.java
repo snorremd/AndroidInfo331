@@ -1,11 +1,9 @@
 package no.uib.info331.geomusic;
 
+import no.uib.info331.geomusic.utils.FetchEventFavoriteArtistsAsyncTask;
 import no.uib.info331.geomusic.utils.FetchEventListAsyncTask;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,6 +11,8 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class WelcomeActivity extends Activity implements LocationListener {
@@ -38,9 +38,27 @@ public class WelcomeActivity extends Activity implements LocationListener {
         Location location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(location != null) {
         	application.setLocation(location);
-        	fetchEventList(location);
         }
         
+        Button nearbyEventButton = (Button) findViewById(R.id.near_events_button);
+        nearbyEventButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+	        	fetchEventList(application.getLocation());
+			}
+		});
+        
+        Button favoriteArtistsEventButton = (Button) findViewById(R.id.favorite_artist_events_button);
+        favoriteArtistsEventButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+	        	fetchEventFavoriteArtistsList();
+			}
+		});
     }
 
     @Override
@@ -62,6 +80,12 @@ public class WelcomeActivity extends Activity implements LocationListener {
     	//Log.d("WelcomeActivity", "location = " + location.getLatitude() + "-" + location.getLongitude());
     }
     
+    public void fetchEventFavoriteArtistsList() {
+    	Log.d("WelcomeActivity", "Fetch events based on favorite artists: ");
+    	FetchEventFavoriteArtistsAsyncTask fetchEventListAT = new FetchEventFavoriteArtistsAsyncTask(this);
+        fetchEventListAT.execute("");
+    }
+    
     /**
      * An object implementing the AsyncTask interface can call
      * this method and pass a list of events to show the
@@ -81,7 +105,7 @@ public class WelcomeActivity extends Activity implements LocationListener {
 		
 		/* Saving the location for source location to take the direction */
 		application.setLocation(location);
-		fetchEventList(location);
+//		fetchEventList(location);
 	}
 
 	@Override

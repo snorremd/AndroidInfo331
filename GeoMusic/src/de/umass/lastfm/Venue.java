@@ -26,6 +26,7 @@
 
 package de.umass.lastfm;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -39,7 +40,7 @@ import de.umass.xml.DomElement;
  *
  * @author Janni Kovacs
  */
-public class Venue extends ImageHolder {
+public class Venue extends ImageHolder implements Serializable {
 
 	static final ItemFactory<Venue> FACTORY = new VenueFactory();
 	
