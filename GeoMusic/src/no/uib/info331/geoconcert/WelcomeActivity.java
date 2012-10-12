@@ -3,17 +3,23 @@ package no.uib.info331.geoconcert;
 import no.uib.info331.geoconcert.utils.FetchEventFavoriteArtistsAsyncTask;
 import no.uib.info331.geoconcert.utils.FetchEventListAsyncTask;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class WelcomeActivity extends Activity implements LocationListener {
 	
@@ -59,12 +65,7 @@ public class WelcomeActivity extends Activity implements LocationListener {
 	        	fetchEventFavoriteArtistsList();
 			}
 		});
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_welcome, menu);
-        return true;
+        
     }
     
     /**
@@ -142,4 +143,58 @@ public class WelcomeActivity extends Activity implements LocationListener {
 		
 	}
     
+	/* MENU FUNCTION */
+	
+	// Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.layout.menu, menu);
+        return true;
+    }
+ 
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+ 
+        switch (item.getItemId())
+        {
+        case R.id.menu_preferences:
+        	Log.d("menu","pressed preferences button ");
+        	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        	alert.setTitle("Preferences");
+        	alert.setMessage("Insert username");
+
+        	// Set an EditText view to get user input 
+        	final EditText input = new EditText(this);
+        	alert.setView(input);
+
+        	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        	public void onClick(DialogInterface dialog, int whichButton) {
+        	  Editable value = input.getText();
+        	  Log.d("button value", value.toString());
+        	  application.setUsername(value.toString());
+        	  // Do something with value!
+        	  }
+        	});
+
+        	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        	  public void onClick(DialogInterface dialog, int whichButton) {
+        	    // Canceled.
+        	  }
+        	});
+
+        	alert.show();
+            return true;
+ 
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }    
 }

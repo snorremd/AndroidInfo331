@@ -23,10 +23,19 @@ AsyncTask<Location, Integer, PaginatedResult<Event>> {
 
 	@Override
 	protected PaginatedResult<Event> doInBackground(Location... locations) {
+		
+		if(locations == null)
+			return null;
+		
 		Location loc=locations[0];
+		
+		if(loc == null)
+			return null;
 		double latitude=loc.getLatitude();
 		double longitude=loc.getLongitude();
 
+		
+		
 		Log.d("FetchEventList", "Get events with location: " + loc.getLatitude() + " : " + loc.getLongitude());
 
 		PaginatedResult<Event> events = Geo.getEvents(latitude,longitude,1, activity.getString(R.string.lastfm_api_key));
@@ -38,6 +47,7 @@ AsyncTask<Location, Integer, PaginatedResult<Event>> {
 
 	@Override
 	protected void onPostExecute(PaginatedResult<Event> result) {
+		
 		super.onPostExecute(result);
 		GeoConcertApplication app = (GeoConcertApplication) activity.getApplication();
 		app.createEvents(result);

@@ -2,6 +2,7 @@ package no.uib.info331.geoconcert.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
 import no.uib.info331.geoconcert.GeoConcertApplication;
@@ -34,7 +35,11 @@ AsyncTask<String, Integer, ArrayList<Event>> {
 
 		ArrayList<Event> events = new ArrayList<Event>();
 		
-		Collection<Artist> artists = User.getTopArtists(activity.getString(R.string.user), activity.getString(R.string.lastfm_api_key));
+		GeoConcertApplication application = (GeoConcertApplication) activity.getApplication();
+		if(application.getUsername() == null || application.getUsername().equals(""))
+			return events;
+		
+		Collection<Artist> artists = User.getTopArtists(application.getUsername(), activity.getString(R.string.lastfm_api_key));
 		Log.d("DEBUG", "artist size = " + artists.size());
 		
 		int num = 0;
@@ -55,7 +60,25 @@ AsyncTask<String, Integer, ArrayList<Event>> {
 			}
 		}
 		
-		return events;
+		/* ordering list by data */
+		ArrayList<Event> returnList = new ArrayList<Event>();
+		while(events.size() > 0)
+		{
+			Date data = events.get(0).getStartDate();
+			int index = 0;
+			
+			for(int j = 0; j < events.size(); j++)
+			{
+				if(data.after(events.get(j).getStartDate()))
+				{
+					data = events.get(j).getStartDate();
+					index = j;
+				}
+			}
+			returnList.add(events.get(index));
+			events.remove(index);
+		}
+		return returnList;
 
 	}
 
