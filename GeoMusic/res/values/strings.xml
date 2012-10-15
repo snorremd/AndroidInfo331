@@ -20,9 +20,10 @@
     <string name="find_events">Find events</string>
     <string name="user">acresta88</string>
     <string name="title_activity_test">TestActivity</string>
-	<string name="facebook_id">288197461300170</string>
+    <string name="facebook_id">288197461300170</string>
     <string name="facebook_secret">37fa7b321477cf395a3adaef4b2ada04</string>
     <string name="get_directions">Get directions</string>
     <string name="add_calendar">Add to Google calendar</string>
     <string name="create_facebook_event">Create Facebook event</string>
+    <string name="title_activity_dialog_username">DialogUsername</string>
 </resources>

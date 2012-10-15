@@ -3,20 +3,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <EditText android:id="@+id/search_box" 
+
+    <EditText
+        android:id="@+id/search_box"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="type to filter"
         android:inputType="text"
-        android:maxLines="1"/>
-    
+        android:maxLines="1" />
 
     <ListView
         android:id="@+id/android:list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="316dp"
+        android:layout_weight="0.96" >
+
     </ListView>
 
-</LinearLayout>
-<!-- http://www.vogella.com/articles/AndroidListView/article.html -->
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_gravity="bottom|end"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/favorite_artist_events_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/near_events_button"
+            android:layout_weight="0.5"
+            android:text="favorite artist events" />
+
+        <Button
+            android:id="@+id/near_events_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/favorite_artist_events_button"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/favorite_artist_events_button"
+            android:layout_gravity="fill_vertical"
+            android:layout_weight="0.5"
+            android:text="nearby events" />
+    </RelativeLayout>
+
+</LinearLayout> <!-- http://www.vogella.com/articles/AndroidListView/article.html -->
+

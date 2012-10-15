@@ -2,8 +2,10 @@ package no.uib.info331.geoconcert.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
+import no.uib.info331.geoconcert.EventListActivity;
 import no.uib.info331.geoconcert.GeoConcertApplication;
 import no.uib.info331.geoconcert.R;
 import no.uib.info331.geoconcert.WelcomeActivity;
@@ -30,32 +32,55 @@ AsyncTask<String, Integer, ArrayList<Event>> {
 	@Override
 	protected ArrayList<Event> doInBackground(String... strings) {
 	
-//		Log.d("FetchEventList", "Get events with location: " + loc.getLatitude() + " : " + loc.getLongitude());
+		Log.d("FetchEventFavoriteArtistsAsyncTask", "Getting events from Last.fm api");
 
 		ArrayList<Event> events = new ArrayList<Event>();
 		
-		Collection<Artist> artists = User.getTopArtists(activity.getString(R.string.user), activity.getString(R.string.lastfm_api_key));
-		Log.d("DEBUG", "artist size = " + artists.size());
+		String username = strings[0];
+		GeoConcertApplication application = (GeoConcertApplication) activity.getApplication();
+		if(username == null || username.equals(""))
+			return events;
+		
+		Collection<Artist> artists = User.getTopArtists(username, activity.getString(R.string.lastfm_api_key));
+		Log.d("FetchEventFavoriteArtistsAsyncTask", "Artist size = " + artists.size());
 		
 		int num = 0;
 		
-		Iterator i = artists.iterator();
+		Iterator<Artist> i = artists.iterator();
 		while(i.hasNext() && num < 4)
 		{
 			num++;
 			Artist a = (Artist) i.next();
 			PaginatedResult<Event> pe = Artist.getEvents(a.getName(), activity.getString(R.string.lastfm_api_key));
-			Iterator ie = pe.iterator();
+			Iterator<Event> ie = pe.iterator();
 			while (ie.hasNext())
 			{
 				
-				Event e = (Event) ie.next();
+				Event e = ie.next();
 				Log.d("event",e.getTitle());
 				events.add(e);
 			}
 		}
 		
-		return events;
+		/* ordering list by data */
+		ArrayList<Event> returnList = new ArrayList<Event>();
+		while(events.size() > 0)
+		{
+			Date data = events.get(0).getStartDate();
+			int index = 0;
+			
+			for(int j = 0; j < events.size(); j++)
+			{
+				if(data.after(events.get(j).getStartDate()))
+				{
+					data = events.get(j).getStartDate();
+					index = j;
+				}
+			}
+			returnList.add(events.get(index));
+			events.remove(index);
+		}
+		return returnList;
 
 	}
 
@@ -65,8 +90,9 @@ AsyncTask<String, Integer, ArrayList<Event>> {
 		GeoConcertApplication app = (GeoConcertApplication) activity.getApplication();
 		app.setEvents(result);
 		if(activity instanceof WelcomeActivity) {
-
 			((WelcomeActivity) activity).showEventListActivity();
+		} else if(activity instanceof EventListActivity) {
+			((EventListActivity) activity).showFavoriteArtists();
 		}
 		Log.d("popular log","list size " + result.size());
 	}

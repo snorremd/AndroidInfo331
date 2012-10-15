@@ -26,6 +26,7 @@ public class EventInfoActivity extends Activity {
 
 	private ListView artistList;
 	private ArrayList<String> artists;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

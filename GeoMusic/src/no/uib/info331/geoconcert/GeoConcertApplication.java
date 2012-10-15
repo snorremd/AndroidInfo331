@@ -28,6 +28,7 @@ public class GeoConcertApplication extends Application {
 	private ArrayList<Event> events;
 	private LocationManager locationManager;
 	private Location location;
+	private String username;
 
 	/**
 	 * Private constructor. Is not to be called.
@@ -163,5 +164,13 @@ public class GeoConcertApplication extends Application {
 
 	}
 
+	public void setUsername(String username) {
+		// TODO Auto-generated method stub
+		this.username = username;
+	}
 
+	public String getUsername()
+	{
+		return this.username;
+	}
 }
