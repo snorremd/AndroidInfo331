@@ -26,6 +26,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import de.umass.lastfm.Event;
 
+/**
+ * This activity is used to show a list of concert events.
+ * 
+ * @author snorre
+ *
+ */
 public class EventListActivity extends ListActivity implements LocationListener {
 	
 	private TextWatcher searchTextWatcher;
