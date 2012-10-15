@@ -1,64 +1,88 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android1="http://schemas.android.com/apk/res/android"
-    android1:id="@+id/LinearLayout1"
+    android1:id="@+id/ScrollView1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android1:orientation="vertical" >    
-    <TextView
-        android:id="@+id/eventName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android1:layout_gravity="center_horizontal"
-        android:text="Event Name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    android:layout_height="match_parent" >
 
-    
-        <TextView
-            android1:id="@+id/eventLocation"
-            android1:layout_width="match_parent"
-            android1:layout_height="wrap_content"
-            android1:text="Brann stadion "
-            android1:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android1:id="@+id/eventDateAndTime"
-            android1:layout_width="match_parent"
-            android1:layout_height="wrap_content"
-            android1:text="kl 1745"
-            android1:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android1:id="@+id/eventDescription"
+    <LinearLayout
         android1:layout_width="match_parent"
         android1:layout_height="wrap_content"
-        android1:text="event description" />
+        android1:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/artistsTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/artists"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <LinearLayout
+            android1:layout_width="match_parent"
+            android1:layout_height="wrap_content"
+            android1:orientation="vertical" >
 
-    <ListView
-        android1:id="@+id/artistList"
-        android1:layout_width="match_parent"
-        android1:layout_height="118dp" >
-    </ListView>
+            <TextView
+                android1:id="@+id/eventName"
+                android1:layout_width="match_parent"
+                android1:layout_height="wrap_content"
+                android1:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android1:id="@+id/eventDirection"
-        style="?android:attr/buttonStyleSmall"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:text="GetDirection" />
-	<Button
-	    android1:id="@+id/addToCalendarButton"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:text="Add to calendar" />
+            <TextView
+                android1:id="@+id/eventLocation"
+                android1:layout_width="match_parent"
+                android1:layout_height="wrap_content"
+                android1:textAppearance="?android:attr/textAppearanceSmall" />
 
-	
+            <TextView
+                android1:id="@+id/eventDateAndTime"
+                android1:layout_width="match_parent"
+                android1:layout_height="wrap_content"
+                android1:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
 
-</LinearLayout>
+        <TextView
+            android1:id="@+id/eventDescription"
+            android1:layout_width="match_parent"
+            android1:layout_height="wrap_content" />
+
+        <LinearLayout
+            android1:layout_width="match_parent"
+            android1:layout_height="208dp"
+            android1:orientation="vertical" >
+
+            <TextView
+                android1:id="@+id/artistsTitle"
+                android1:layout_width="match_parent"
+                android1:layout_height="wrap_content"
+                android1:text="@string/artists"
+                android1:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ListView
+                android1:id="@+id/artistList"
+                android1:layout_width="match_parent"
+                android1:layout_height="wrap_content"
+                android1:layout_weight="0.3" >
+
+            </ListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android1:layout_width="match_parent"
+            android1:layout_height="wrap_content"
+            android1:orientation="vertical" >
+
+            <Button
+                android1:id="@+id/eventDirection"
+                android1:layout_width="match_parent"
+                android1:layout_height="wrap_content"
+                android1:text="@string/get_directions" />
+
+            <Button
+                android1:id="@+id/addToCalendarButton"
+                android1:layout_width="match_parent"
+                android1:layout_height="wrap_content"
+                android1:text="@string/add_calendar" />
+
+            <Button
+                android1:id="@+id/createEventFacebook"
+                android1:layout_width="match_parent"
+                android1:layout_height="wrap_content"
+                android1:text="@string/create_facebook_event" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
