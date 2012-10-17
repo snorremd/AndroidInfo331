@@ -1,12 +1,14 @@
 package no.uib.info331.geoconcert;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import no.uib.info331.geoconcert.utils.FetchEventFavoriteArtistsAsyncTask;
 import no.uib.info331.geoconcert.utils.FetchEventsForGeoAsyncTask;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -22,6 +24,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import de.umass.lastfm.Event;
@@ -29,7 +34,7 @@ import de.umass.lastfm.Event;
 /**
  * This activity is used to show a list of concert events.
  * 
- * @author snorre
+ * @author Snorre, Per and company
  *
  */
 public class EventListActivity extends ListActivity implements LocationListener {
@@ -97,6 +102,30 @@ public class EventListActivity extends ListActivity implements LocationListener 
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 	        	fetchEventFavoriteArtistsList();
+			}
+		});
+        
+        CheckBox sortByProximityCheckBox = (CheckBox) findViewById(R.id.sortByGeoCheckBox);
+        sortByProximityCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				EventAdapter adapter = (EventAdapter) getListAdapter();	
+				
+				if(isChecked) {
+					//sort by nearest first
+					ArrayList <Event> geoSortedEvents = (ArrayList<Event>) events.clone();
+					
+					Collections.sort(geoSortedEvents, EventListActivity.this.application);
+					
+					adapter.newList(geoSortedEvents);
+					adapter.notifyDataSetChanged();
+				}
+				else {
+					adapter.newList(events);
+					adapter.notifyDataSetChanged();
+				}
+				
 			}
 		});
     }

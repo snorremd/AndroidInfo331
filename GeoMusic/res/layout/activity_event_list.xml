@@ -12,6 +12,12 @@
         android:inputType="text"
         android:maxLines="1" />
 
+    <CheckBox
+        android:id="@+id/sortByGeoCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sort by proximity" />
+
     <ListView
         android:id="@+id/android:list"
         android:layout_width="match_parent"
@@ -47,6 +53,7 @@
             android:layout_gravity="fill_vertical"
             android:layout_weight="0.5"
             android:text="nearby events" />
+        
     </RelativeLayout>
 
 </LinearLayout> <!-- http://www.vogella.com/articles/AndroidListView/article.html -->

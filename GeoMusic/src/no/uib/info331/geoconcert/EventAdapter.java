@@ -1,6 +1,7 @@
 package no.uib.info331.geoconcert;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -26,6 +27,10 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 		this.events = events;
 		this.initialEvents = (ArrayList<Event>) events.clone();
 
+	}
+	
+	public void newList(ArrayList<Event> col)  {
+		this.events = col;
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import android.app.Application;
@@ -21,7 +22,7 @@ import android.util.Log;
 import de.umass.lastfm.Event;
 import de.umass.lastfm.PaginatedResult;
 
-public class GeoConcertApplication extends Application {
+public class GeoConcertApplication extends Application implements Comparator<Event> {
 	// private static GeoConcertApplication singleton;
 
 	/* list of the events */
@@ -172,5 +173,34 @@ public class GeoConcertApplication extends Application {
 	public String getUsername()
 	{
 		return this.username;
+	}
+
+	@Override
+	 /**
+	  * This method is comparing based on geo. Refactor this if you can, but should be able
+	  * to get the last known location, and that is why I paced it here and let Application
+	  * implement comparator.
+	  */
+	public int compare(Event lhs, Event rhs) {
+		Location lhsLocation = new Location("lastfm");
+		lhsLocation.setLatitude(lhs.getVenue().getLatitude());
+		lhsLocation.setLongitude(lhs.getVenue().getLongitude());
+		float distanceToLhs = location.distanceTo(lhsLocation);
+		
+		Location rhsLocation = new Location("lastfm");
+		rhsLocation.setLatitude(rhs.getVenue().getLatitude());
+		lhsLocation.setLongitude(rhs.getVenue().getLongitude());
+		float distanceToRhs = location.distanceTo(lhsLocation);
+		
+		if(distanceToLhs > distanceToRhs) {
+			return -1;
+		}
+		else if(distanceToLhs < distanceToRhs) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+
 	}
 }
