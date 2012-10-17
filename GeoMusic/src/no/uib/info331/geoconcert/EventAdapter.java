@@ -40,10 +40,12 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 		// Get instances for text views in the row view
 		TextView titleTextView = (TextView) eventListViewItemRow.findViewById(R.id.eventTitleTextView);
 		TextView dateAndTimeTextView = (TextView) eventListViewItemRow.findViewById(R.id.eventDateAndTimeTextView);
+		TextView shortLocationTextView = (TextView) eventListViewItemRow.findViewById(R.id.eventShortLocation);
 		TextView eventArtistsTextView = (TextView) eventListViewItemRow.findViewById(R.id.eventArtistsTextView);
 
 		String eventTitle = events.get(position).getTitle();
 		String dateAndTime = "" + events.get(position).getStartDate();
+		String shortLocation = events.get(position).getVenue().getName() + " " + events.get(position).getVenue().getCity();
 		String artists = "";
 		ArrayList<String> artistList = new ArrayList<String>(events.get(position).getArtists());
 		int listSize = artistList.size();
@@ -57,6 +59,7 @@ public class EventAdapter extends ArrayAdapter<Event> implements Filterable{
 
 		titleTextView.setText(eventTitle);
 		dateAndTimeTextView.setText(dateAndTime);
+		shortLocationTextView.setText(shortLocation);
 		eventArtistsTextView.setText(artists);
 
 		return eventListViewItemRow;
