@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -159,9 +160,9 @@ public class EventListActivity extends ListActivity implements LocationListener 
 		super.onPause();
 		Log.d("log", "onPause");
 
-		GeoConcertApplication application = (GeoConcertApplication)getApplication();
-		if(application.getEvents() != null)
-			application.writeObject();
+//		GeoConcertApplication application = (GeoConcertApplication)getApplication();
+//		if(application.getEvents() != null)
+//			application.writeObject();
 	}
 
 	@Override
@@ -169,10 +170,11 @@ public class EventListActivity extends ListActivity implements LocationListener 
 		// TODO Auto-generated method stub
 		super.onRestart();
 		Log.d("log", "onRestart");
-
-		GeoConcertApplication application = (GeoConcertApplication)getApplication();
-		if(application.getEvents() == null)
-			application.readObject();
+		
+		fetchEventList(application.getLocation());
+//		GeoConcertApplication application = (GeoConcertApplication)getApplication();
+//		if(application.getEvents() == null)
+//			application.readObject();
 	}
 
 	@Override
@@ -180,10 +182,11 @@ public class EventListActivity extends ListActivity implements LocationListener 
 		// TODO Auto-generated method stub
 		super.onResume();
 		Log.d("log", "onResume");
-
-		GeoConcertApplication application = (GeoConcertApplication)getApplication();
-		if(application.getEvents() == null)
-			application.readObject();
+		
+		fetchEventList(application.getLocation());
+//		GeoConcertApplication application = (GeoConcertApplication)getApplication();
+//		if(application.getEvents() == null)
+//			application.readObject();
 	}
 
 	@Override
@@ -192,9 +195,9 @@ public class EventListActivity extends ListActivity implements LocationListener 
 		super.onStop();
 		Log.d("log", "onStop");
 		
-		GeoConcertApplication application = (GeoConcertApplication)getApplication();
-		if(application.getEvents() == null)
-			application.writeObject();
+//		GeoConcertApplication application = (GeoConcertApplication)getApplication();
+//		if(application.getEvents() == null)
+//			application.writeObject();
 	}
 	
 	 /**
