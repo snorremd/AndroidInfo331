@@ -189,14 +189,14 @@ public class GeoConcertApplication extends Application implements Comparator<Eve
 		
 		Location rhsLocation = new Location("lastfm");
 		rhsLocation.setLatitude(rhs.getVenue().getLatitude());
-		lhsLocation.setLongitude(rhs.getVenue().getLongitude());
-		float distanceToRhs = location.distanceTo(lhsLocation);
+		rhsLocation.setLongitude(rhs.getVenue().getLongitude());
+		float distanceToRhs = location.distanceTo(rhsLocation);
 		
 		if(distanceToLhs > distanceToRhs) {
-			return -1;
+			return 1;
 		}
 		else if(distanceToLhs < distanceToRhs) {
-			return 1;
+			return -1;
 		}
 		else {
 			return 0;

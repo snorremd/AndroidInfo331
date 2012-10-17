@@ -1,6 +1,5 @@
 package no.uib.info331.geoconcert;
 
-import no.uib.info331.geoconcert.utils.FetchEventFavoriteArtistsAsyncTask;
 import no.uib.info331.geoconcert.utils.FetchEventsForGeoAsyncTask;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,9 +15,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 
 public class WelcomeActivity extends Activity implements LocationListener {
@@ -31,17 +27,19 @@ public class WelcomeActivity extends Activity implements LocationListener {
 		super.onCreate(savedInstanceState);
 		Log.d("WelcomeActivity", "In on create welcome activity");
 
-		Log.d("WelcomeActivity", "Sat content view");
-		setContentView(R.layout.activity_welcome);
 
+		setContentView(R.layout.activity_welcome);
+		Log.d("WelcomeActivity", "Sat content view");
+		
 		Log.d("WelcomeActivity", "Get application instance");
 		application = ((GeoConcertApplication) getApplication());
 		locManager = application.getLocationManager();
-		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-		/* the follow line works only on a phone!! */
-		//        locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-		//the following lines are needed for the welcomeactivity not to wait for updates and run immediately
-		Location location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        locManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                3000,
+                10, this);		
+		Location location = locManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+		Log.d("WelcomeActivity", "location is: " + location);
 		if(location != null) {
 			application.setLocation(location);
 		}
