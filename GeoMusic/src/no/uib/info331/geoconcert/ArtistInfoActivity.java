@@ -15,6 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -114,7 +115,7 @@ public class ArtistInfoActivity extends Activity {
 	public void showArtistInfo(Artist result) {
 
 		TextView artistName = (TextView)findViewById(R.id.artist_name);
-		artistName.setText(result.getName());
+		artistName.setText(Html.fromHtml(result.getName()));
 		
 		ImageView artistImage = (ImageView)findViewById(R.id.artist_image);
 		
@@ -127,7 +128,7 @@ public class ArtistInfoActivity extends Activity {
 	    }
 		
 		TextView artistSummary = (TextView)findViewById(R.id.artist_summary_text);
-		artistSummary.setText(result.getWikiSummary());
+		artistSummary.setText(Html.fromHtml(result.getWikiSummary()));
 	}
 	public void playPopularTrack(String trackname){
 		
