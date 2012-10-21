@@ -1,6 +1,7 @@
 package no.uib.info331.geoconcert;
 
 import java.io.InputStream;
+
 import java.net.URL;
 
 import no.uib.info331.geoconcert.utils.FetchArtistAsyncTask;
@@ -26,7 +27,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import de.umass.lastfm.Artist;
 import de.umass.lastfm.ImageSize;
-
+/**
+ * Experimental branch - adding comment to commit and push
+ * @author studiet
+ *
+ */
 public class ArtistInfoActivity extends Activity {
 	
 	String artist;
