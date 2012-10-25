@@ -15,7 +15,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class WelcomeActivity extends Activity implements LocationListener {
 
@@ -43,10 +46,22 @@ public class WelcomeActivity extends Activity implements LocationListener {
 		if(location != null) {
 			application.setLocation(location);
 		}
-
+		
+		TextView t = (TextView) findViewById(R.id.welcomeText);
+		t.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent();
+				i.setAction(ACTIVITY_SERVICE);
+				i.setClass(application, EventListActivity.class);
+				startActivity(i);
+			}
+		});
 		fetchEventList(application.getLocation());
 	}
-
+	
 	/**
 	 * This method is called by a LocationListener to initiate
 	 * fetching of events based on a Location object that specifies
@@ -79,7 +94,7 @@ public class WelcomeActivity extends Activity implements LocationListener {
 
 		/* Saving the location for source location to take the direction */
 		application.setLocation(location);
-		//		fetchEventList(location);
+//		fetchEventList(application.getLocation());
 	}
 
 	@Override
@@ -134,40 +149,46 @@ public class WelcomeActivity extends Activity implements LocationListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-
 		switch (item.getItemId())
 		{
 		case R.id.menu_preferences:
-			Log.d("menu","pressed preferences button ");
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-			alert.setTitle("Preferences");
-			alert.setMessage("Insert username");
-
-			// Set an EditText view to get user input 
-			final EditText input = new EditText(this);
-			alert.setView(input);
-
-			alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					Editable value = input.getText();
-					Log.d("button value", value.toString());
-					application.setUsername(value.toString());
-					// Do something with value!
-				}
-			});
-
-			alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					// Canceled.
-				}
-			});
-
-			alert.show();
+			showUserNameDialog();
 			return true;
 
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}    
+	
+	private void showUserNameDialog()
+	{
+		Log.d("menu","pressed preferences button ");
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle("Preferences");
+		alert.setMessage("Insert username");
+
+		// Set an EditText view to get user input 
+		final EditText input = new EditText(this);
+		alert.setView(input);
+
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				Editable value = input.getText();
+				Log.d("button value", value.toString());
+				application.setUsername(value.toString());
+				// Do something with value!
+			}
+		});
+
+		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				// Canceled.
+			}
+		});
+
+		alert.show();
+	}
+	    
+
 }
