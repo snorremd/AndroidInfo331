@@ -9,7 +9,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
@@ -19,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WelcomeActivity extends Activity implements LocationListener {
 
@@ -45,6 +48,17 @@ public class WelcomeActivity extends Activity implements LocationListener {
 		Log.d("WelcomeActivity", "location is: " + location);
 		if(location != null) {
 			application.setLocation(location);
+			fetchEventList(application.getLocation());
+		}
+		else
+		{
+			Toast.makeText(this, "Application cannot find location", Toast.LENGTH_LONG).show();
+			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE); 
+			if(!locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER ))
+			{
+			    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+			    startActivity(myIntent);
+			}
 		}
 		
 		TextView t = (TextView) findViewById(R.id.welcomeText);
@@ -59,7 +73,7 @@ public class WelcomeActivity extends Activity implements LocationListener {
 				startActivity(i);
 			}
 		});
-		fetchEventList(application.getLocation());
+		
 	}
 	
 	/**
