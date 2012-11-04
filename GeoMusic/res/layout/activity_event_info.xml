@@ -76,12 +76,6 @@
                 android1:layout_width="match_parent"
                 android1:layout_height="wrap_content"
                 android1:text="@string/add_calendar" />
-
-            <Button
-                android1:id="@+id/createEventFacebook"
-                android1:layout_width="match_parent"
-                android1:layout_height="wrap_content"
-                android1:text="@string/create_facebook_event" />
         </LinearLayout>
     </LinearLayout>
 

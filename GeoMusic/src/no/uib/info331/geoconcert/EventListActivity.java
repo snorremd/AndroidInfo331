@@ -119,7 +119,6 @@ public class EventListActivity extends ListActivity implements LocationListener 
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				fetchEventFavoriteArtistsList();
 			}
 		});
@@ -244,6 +243,7 @@ public class EventListActivity extends ListActivity implements LocationListener 
 		if (application.getUsername() == null
 				|| application.getUsername().equals("")) {
 			showUserNameDialog();
+			
 		}
 		FetchEventFavoriteArtistsAsyncTask fetchEventListAT = new FetchEventFavoriteArtistsAsyncTask(
 				this);
@@ -369,7 +369,7 @@ public class EventListActivity extends ListActivity implements LocationListener 
 				Editable value = input.getText();
 				Log.d("button value", value.toString());
 				application.setUsername(value.toString());
-				// Do something with value!
+				fetchEventFavoriteArtistsList();
 			}
 		});
 

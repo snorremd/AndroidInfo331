@@ -3,6 +3,8 @@ package no.uib.info331.geoconcert;
 import no.uib.info331.geoconcert.utils.FetchEventsForGeoAsyncTask;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -10,6 +12,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
@@ -33,46 +37,62 @@ public class WelcomeActivity extends Activity implements LocationListener {
 		super.onCreate(savedInstanceState);
 		Log.d("WelcomeActivity", "In on create welcome activity");
 
-
 		setContentView(R.layout.activity_welcome);
 		Log.d("WelcomeActivity", "Sat content view");
 		
-		Log.d("WelcomeActivity", "Get application instance");
-		application = ((GeoConcertApplication) getApplication());
-		locManager = application.getLocationManager();
-        locManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
-                3000,
-                10, this);		
-		Location location = locManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-		Log.d("WelcomeActivity", "location is: " + location);
-		if(location != null) {
-			application.setLocation(location);
-			fetchEventList(application.getLocation());
-		}
-		else
-		{
-			Toast.makeText(this, "Application cannot find location", Toast.LENGTH_LONG).show();
-			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE); 
-			if(!locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER ))
+		if(hasNetworkConnection()) {
+			Log.d("WelcomeActivity", "Get application instance");
+			application = ((GeoConcertApplication) getApplication());
+			locManager = application.getLocationManager();
+	        locManager.requestLocationUpdates(
+	                LocationManager.GPS_PROVIDER,
+	                3000,
+	                10, this);		
+			Location location = locManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+			Log.d("WelcomeActivity", "location is: " + location);
+			if(location != null) {
+				application.setLocation(location);
+				fetchEventList(application.getLocation());
+			}
+			else
 			{
-			    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-			    startActivity(myIntent);
+				Toast.makeText(this, "Application cannot find location", Toast.LENGTH_LONG).show();
+				LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE); 
+				if(!locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER ))
+				{
+				    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				    startActivity(myIntent);
+				}
 			}
-		}
-		
-		TextView t = (TextView) findViewById(R.id.welcomeText);
-		t.setOnClickListener(new OnClickListener() {
 			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent();
-				i.setAction(ACTIVITY_SERVICE);
-				i.setClass(application, EventListActivity.class);
-				startActivity(i);
-			}
-		});
+			TextView t = (TextView) findViewById(R.id.welcomeText);
+			t.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent i = new Intent();
+					i.setAction(ACTIVITY_SERVICE);
+					i.setClass(application, EventListActivity.class);
+					startActivity(i);
+				}
+			});
+			
+		} else {
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+			alert.setTitle("Connection error");
+			alert.setMessage("No network detected");
+			alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					openNetworkSettings();
+				}
+			});
+			alert.show();
+			
+		}
+			
+		
 		
 	}
 	
@@ -202,6 +222,24 @@ public class WelcomeActivity extends Activity implements LocationListener {
 		});
 
 		alert.show();
+	}
+	
+	private boolean hasNetworkConnection() {
+		ConnectivityManager cm = 
+				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+		if(networkInfo != null && networkInfo.isConnected()) {
+			Log.d("WelcomeActivity", "Network connection found");
+			return true;
+		}
+		Log.d("WelcomeActivity", "No network connection found");
+		return false;
+	}
+	
+	private void openNetworkSettings() {
+		Intent networkIntent = new Intent(Settings.ACTION_SETTINGS);
+		startActivity(networkIntent);
+		
 	}
 	    
 

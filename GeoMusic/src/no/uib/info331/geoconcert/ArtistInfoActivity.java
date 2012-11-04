@@ -41,6 +41,7 @@ public class ArtistInfoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_info);
         
+        // Comment here.
         Intent intent = getIntent();
         artist = intent.getStringExtra("ArtistName");
         new FetchArtistAsyncTask(this).execute(artist);
