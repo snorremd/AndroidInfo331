@@ -358,7 +358,7 @@ public class EventListActivity extends ListActivity implements LocationListener 
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle("Preferences");
-		alert.setMessage("Insert username");
+		alert.setMessage("Enter Last.fm username");
 
 		// Set an EditText view to get user input
 		final EditText input = new EditText(this);

@@ -2,21 +2,21 @@
 
     <string name="app_name">GeoConcert</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">GeoConcert - Main</string>
-    <string name="title_activity_event_list">GeoConcert - Event List</string>
-    <string name="title_activity_welcome">GeoConcert - Welcome</string>
-    <string name="title_activity_event_info">GeoConcert - Event Info</string>
+    <string name="title_activity_main">Main - GeoConcert</string>
+    <string name="title_activity_event_list">Event List - GeoConcert</string>
+    <string name="title_activity_welcome">Welcome - GeoConcert</string>
+    <string name="title_activity_event_info">Event Info - GeoConcert</string>
     <string name="artists">Artists</string>
     <string name="lastfm_api_key">07230bd610a9af18c7e1f19d2da654f1</string>
     <string name="lastfm_secret">aee7a363ef03d2d0d6513e0eefaf903b</string>
     <string name="placeholder">Placeholder Text</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_artist_info">ArtistInfoActivity</string>
+    <string name="title_activity_artist_info">Artist Info - Geo Concert</string>
     <string name="artist_summary_title">Summary</string>
-    <string name="play_most_popular_song">Play most popular song</string>
-    <string name="open_artist">Open artist</string>
+    <string name="play_most_popular_song">Play most popular song in Spotify</string>
+    <string name="open_artist">Open artist in Spotify</string>
     <string name="find_similar">Find similar</string>
-    <string name="title_activity_similar_artists">SimilarArtistsActivity</string>
+    <string name="title_activity_similar_artists">Similar Artists - GeoConcert</string>
     <string name="find_events">Find events</string>
     <string name="user">acresta88</string>
     <string name="title_activity_test">TestActivity</string>
@@ -25,5 +25,5 @@
     <string name="get_directions">Get directions</string>
     <string name="add_calendar">Add to Google calendar</string>
     <string name="create_facebook_event">Create Facebook event</string>
-    <string name="title_activity_dialog_username">DialogUsername</string>
+    <string name="title_activity_dialog_username">Last.fm Username</string>
 </resources>
